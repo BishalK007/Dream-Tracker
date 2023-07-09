@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:dream_tracker/backend.dart';
 import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
@@ -19,7 +17,6 @@ class _HomeCardState extends State<HomeCard> {
       stream: getGoalItemStream(),
       builder: (context, itemSnapShot) {
         if (itemSnapShot.connectionState == ConnectionState.waiting ||
-            itemSnapShot.data.isNull ||
             itemSnapShot.hasError) {
           return const Center(
             child: Text('Dang!! Couldnt fetch data'),
