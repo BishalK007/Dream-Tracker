@@ -30,6 +30,9 @@ class _HomeCardState extends State<HomeCard> {
           );
         } else if (itemSnapShot.connectionState == ConnectionState.waiting) {
           return ExpansionTileCard(
+            initialPadding: const EdgeInsets.symmetric(vertical: 8),
+            initialElevation: 5,
+            elevation: 5,
             leading: Icon(icons[0]),
             title: const Text('Title'),
             subtitle: const Column(

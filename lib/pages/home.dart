@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
             //____APP BAR
             //
             SliverAppBar(
-              title: const Text('Dream Tracker'),
+              title: const Text('Dashboard'),
               backgroundColor: Theme.of(context).primaryColor,
               actions: [
                 PopupMenuButton<int>(
@@ -110,6 +110,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             FloatingActionButton(
+              tooltip: "Add Goal",
               onPressed: () {
                 showModalBottomSheet(
                   isScrollControlled: true,
