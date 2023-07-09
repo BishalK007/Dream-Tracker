@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:expandable_text/expandable_text.dart';
 
+import '../pages/editPreferenceDetails.dart';
+
 class HomeCard extends StatefulWidget {
   const HomeCard({super.key, required this.id});
   final String id;
@@ -205,6 +207,22 @@ class _HomeCardState extends State<HomeCard> {
                         child: InkWell(
                           onTap: () {
                             // Handle button tap
+                            if (index == 2) {
+                              showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  context: context,
+                                  builder: (context) => const FractionallySizedBox(
+                                        heightFactor: 0.8,
+                                        child: EditPrederence(
+                                          description: 'abcd',
+                                          goalAmt: 0,
+                                          goalId: 'o',
+                                          preference: 'aa',
+                                          savedAmt: 10,
+                                          //key: ,
+                                        ),
+                                      ));
+                            }
                           },
                           child: Container(
                             width: 40.0,
