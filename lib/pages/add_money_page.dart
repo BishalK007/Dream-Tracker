@@ -1,5 +1,5 @@
-//import 'package:auth_testing/backend/database.dart';
 import 'package:flutter/material.dart';
+import '../backend.dart';
 import '../colors.dart';
 
 class AddMoney extends StatefulWidget {
@@ -168,10 +168,11 @@ class _AddMoneyState extends State<AddMoney> {
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 //todo add money submit
+                                // addMoney(_descriptionController.text , );
                                 Navigator.pop(context);
                               }
                             },
-                            child: const Text('Submit'),
+                            child: const Text('Add'),
                           ),
                         ],
                       ),

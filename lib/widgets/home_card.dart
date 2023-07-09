@@ -1,6 +1,7 @@
 import 'package:dream_tracker/backend.dart';
 import 'package:dream_tracker/colors.dart';
 import 'package:dream_tracker/global_variables.dart';
+import 'package:dream_tracker/pages/add_money_page.dart';
 import 'package:dream_tracker/widgets/ad_place.dart';
 import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
@@ -80,7 +81,9 @@ class _HomeCardState extends State<HomeCard> {
                   //________ Add Button ______//
                   //
                   ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      print("Add m");
+                    },
                     icon: const Icon(Icons.add),
                     label: const Text('Add Money'),
                   ),
@@ -193,7 +196,21 @@ class _HomeCardState extends State<HomeCard> {
                   //________ Add Button ______//
                   //
                   ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      showModalBottomSheet(
+                        isScrollControlled: true,
+                        context: context,
+                        builder: (context) => FractionallySizedBox(
+                          heightFactor: 0.8,
+                          child: AddMoney(
+                              goalId: itemSnapShot.data!.id,
+                              preference: itemSnapShot.data!.title,
+                              description: itemSnapShot.data!.notes,
+                              savedAmt: itemSnapShot.data!.amountSaved,
+                              goalAmt: itemSnapShot.data!.goalAmount),
+                        ),
+                      );
+                    },
                     icon: const Icon(Icons.add),
                     label: const Text('Add Money'),
                   ),

@@ -158,6 +158,16 @@ Future<void> updateDetails(
   }
 }
 
+Future<void> addMoney(int totalSaved, String goalId) async {
+  try {
+    goals.doc(goalId).update({
+      'amountSaved': totalSaved,
+    });
+  } catch (e) {
+    print('Error occured during $e');
+  }
+}
+
 void deleteGoal(String goalItem) async {
   final currentUserUid = FirebaseAuth.instance.currentUser!.uid;
   final allUsersRef =
