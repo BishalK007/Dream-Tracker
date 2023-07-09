@@ -210,80 +210,139 @@ class _HomeCardState extends State<HomeCard> {
                             // Handle button tap
                             if (index == 0) {
                               showModalBottomSheet(
-                                  isScrollControlled: true,
-                                  context: context,
-                                  builder: (context) => FractionallySizedBox(
-                                      heightFactor: 0.15,
-                                      child: Column(
+                                isScrollControlled: true,
+                                context: context,
+                                builder: (context) => Container(
+                                  height: 120,
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        "Share your goal",
+                                        style: TextStyle(
+                                            color: myPrimarySwatch,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
                                         children: [
-                                          const SizedBox(
-                                            height: 10,
+                                          Expanded(
+                                            child: Center(
+                                              child: Text(
+                                                widget.id,
+                                                style: const TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
                                           ),
-                                          Text(
-                                            "Share your goal",
-                                            style: TextStyle(
-                                                color: myPrimarySwatch,
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          const SizedBox(
-                                            height: 10,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: Center(
-                                                  child: Text(
-                                                    widget.id,
-                                                    style: const TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.bold),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 12.5),
+                                            child: IconButton(
+                                              icon: const Icon(Icons.copy),
+                                              onPressed: () {
+                                                Clipboard.setData(ClipboardData(
+                                                    text: widget.id));
+                                                Navigator.pop(context);
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                        const SnackBar(
+                                                  content: Center(
+                                                    child: Text(
+                                                        'Text copied to clipboard'),
                                                   ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 12.5),
-                                                child: IconButton(
-                                                  icon: const Icon(Icons.copy),
-                                                  onPressed: () {
-                                                    Clipboard.setData(
-                                                        ClipboardData(
-                                                            text: widget.id));
-                                                    Navigator.pop(context);
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
-                                                            const SnackBar(
-                                                      content: Center(
-                                                        child: Text(
-                                                            'Text copied to clipboard'),
-                                                      ),
-                                                    ));
-                                                  },
-                                                ),
-                                              ),
-                                            ],
-                                          )
+                                                ));
+                                              },
+                                            ),
+                                          ),
                                         ],
-                                      )));
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
                             } else if (index == 2) {
                               showModalBottomSheet(
-                                  isScrollControlled: true,
-                                  context: context,
-                                  builder: (context) =>
-                                      const FractionallySizedBox(
-                                        heightFactor: 0.8,
-                                        child: EditPrederence(
-                                          description: 'abcd',
-                                          goalAmt: 0,
-                                          goalId: 'o',
-                                          preference: 'aa',
-                                          savedAmt: 10,
-                                          //key: ,
+                                isScrollControlled: true,
+                                context: context,
+                                builder: (context) =>
+                                    const FractionallySizedBox(
+                                  heightFactor: 0.82,
+                                  child: EditPrederence(
+                                    description: 'abcd',
+                                    goalAmt: 0,
+                                    goalId: 'o',
+                                    preference: 'aa',
+                                    savedAmt: 10,
+                                    //key: ,
+                                  ),
+                                ),
+                              );
+                            } else {
+                              showModalBottomSheet(
+                                isScrollControlled: true,
+                                context: context,
+                                builder: (context) => Container(
+                                  height: 170,
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 20, 0, 30),
+                                        child: Text(
+                                          "Want to Delete Your Goal?",
+                                          style: TextStyle(
+                                              color: myPrimarySwatch,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
                                         ),
-                                      ));
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: List.generate(2, (index) {
+                                          return Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 10),
+                                            child: ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                fixedSize: const Size(100, 50),
+                                                //backgroundColor: Colors.black,
+                                                shape:
+                                                    const StadiumBorder(), // Background color
+                                              ),
+                                              onPressed: () {
+                                                if (index == 0) {
+                                                  Navigator.pop(context);
+                                                } else {
+                                                  deleteGoal(widget.id);
+                                                  Navigator.pop(context);
+                                                }
+                                              },
+                                              child: (index == 0)
+                                                  ? const Text('Cancel')
+                                                  : const Text('Delete'),
+                                            ),
+                                          );
+                                        }),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
                             }
                           },
                           child: Container(
