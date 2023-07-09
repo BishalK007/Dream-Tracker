@@ -10,6 +10,12 @@ class HomeBody extends StatefulWidget {
 class _HomeBodyState extends State<HomeBody> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return StreamBuilder(builder: (context, snapshot) {
+      if(snapshot.connectionState == ConnectionState.waiting){
+        return const Center(
+          child: CircularProgressIndicator(),
+        )
+      }
+    },);
   }
 }
