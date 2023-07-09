@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import '../backend.dart';
 import '../colors.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -37,9 +38,9 @@ class _LoginScreenState extends State<LoginScreen> {
         ));
     // Once signed in, return the UserCredential
     if (user.additionalUserInfo!.isNewUser) {
-      // await addUser();
+      await addUser();
     }
-    // await updateUser();
+    await updateUser();
     return user;
   }
 
@@ -66,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
       return 'Please verify your email first';
     }
     // update the current data of the user in every login
-    // await updateUser();
+    await updateUser();
     return null;
   }
 
@@ -94,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
         if (userCredential.user != null) {
           //created the user database
-          // await addUser();
+          await addUser();
           // User is created, but email is not yet verified
           // Send a verification email to the user
           await userCredential.user!.sendEmailVerification();

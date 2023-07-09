@@ -1,3 +1,4 @@
+import 'package:dream_tracker/backend.dart';
 import 'package:flutter/material.dart';
 
 import '../colors.dart';
@@ -131,7 +132,15 @@ class _PreferenceDetailsState extends State<PreferenceDetails> {
                                 fixedSize: const Size(100, 50)),
                             onPressed: () {
                               //todo submit
-                              if (_formKey.currentState!.validate()) {}
+                              if (_formKey.currentState!.validate()) {
+                                addGoals(
+                                    widget.preference,
+                                    _descriptionController.text,
+                                    int.parse(_goalAmtController.text),
+                                    widget.id);
+                                Navigator.pop(context);
+                                Navigator.pop(context);
+                              }
                             },
                             child: const Text("Submit"),
                           )
