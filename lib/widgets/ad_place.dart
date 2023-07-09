@@ -166,7 +166,7 @@ class _AdPlaceState extends State<AdPlace> {
                     currentIndicatorColor: myPrimarySwatch,
                     indicatorBackgroundColor:
                         Color.fromARGB(255, 221, 189, 255)),
-                itemCount: 3,
+                itemCount: snapshot.data!.length,
               );
             }
           },
