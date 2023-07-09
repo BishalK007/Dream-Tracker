@@ -1,3 +1,4 @@
+import 'package:dream_tracker/pages/preference_selection_page.dart';
 import 'package:dream_tracker/widgets/home_body.dart';
 import 'package:flutter/material.dart';
 import 'package:hidable/hidable.dart';
@@ -40,7 +41,24 @@ class _HomePageState extends State<HomePage> {
       //
       floatingActionButton: Hidable(
         controller: _controller,
-        child: FloatingActionButton(onPressed: () {}),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            FloatingActionButton(
+              onPressed: () {
+                showModalBottomSheet(
+                  isScrollControlled: true,
+                  context: context,
+                  builder: (context) => const FractionallySizedBox(
+                    heightFactor: 0.8,
+                    child: SelectPreference(),
+                  ),
+                );
+              },
+              child: const Icon(Icons.add),
+            ),
+          ],
+        ),
       ),
     );
   }
