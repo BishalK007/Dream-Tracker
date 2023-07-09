@@ -4,6 +4,7 @@ import 'package:dream_tracker/widgets/preference_cards.dart';
 import 'package:flutter/material.dart';
 
 import '../backend.dart';
+import 'firebasePreferenceFetch.dart';
 
 class SelectPreference extends StatefulWidget {
   const SelectPreference({super.key});
@@ -53,10 +54,21 @@ class _SelectPreferenceState extends State<SelectPreference> {
                     suffix: CircleAvatar(
                       radius: 16,
                       child: InkWell(
-                          onTap: () {
-                            // todo sync
-                            addExistingGoal(_syncController.text);
-                            print("sync presses");
+                          onTap: () async {
+                            Map<String, dynamic>? datalist =
+                                await addExistingGoal(_syncController.text);
+                            print(datalist);
+                            // ignore: use_build_context_synchronously
+                            showModalBottomSheet(
+                                context: context,
+                                isScrollControlled: true,
+                                builder: (context) => FractionallySizedBox(
+                                      heightFactor: 0.8,
+                                      child: FirebasePreferenceFetchWidget(
+                                        datalist: datalist,
+                                        docId: _syncController.text,
+                                      ),
+                                    ));
                           },
                           child: const Icon(Icons.add)),
                     )),
