@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   font_awesome_flutter: ^10.5.0
   firebase_core: ^2.14.0
+  hidable: ^1.0.4
 
 dev_dependencies:
   flutter_test:
