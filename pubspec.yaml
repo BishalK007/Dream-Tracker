@@ -42,8 +42,8 @@ dependencies:
   expansion_tile_card: ^3.0.0
   firebase_auth: ^4.6.0
   expandable_text: ^2.3.0
-
   introduction_slider: ^2.0.1
+  google_sign_in: ^6.1.4
 
 dev_dependencies:
   flutter_test:

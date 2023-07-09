@@ -2,6 +2,7 @@ import 'package:dream_tracker/pages/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import '../colors.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -13,35 +14,34 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   Duration get loginTime => const Duration(milliseconds: 1000);
-  // Future<UserCredential> _signInWithGoogle() async {
-  //   // Trigger the authentication flow
-  //   final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+  Future<UserCredential> _signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-  //   // Obtain the auth details from the request
-  //   final GoogleSignInAuthentication? googleAuth =
-  //       await googleUser?.authentication;
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
 
-  //   // Create a new credential
-  //   final credential = GoogleAuthProvider.credential(
-  //     accessToken: googleAuth?.accessToken,
-  //     idToken: googleAuth?.idToken,
-  //   );
-  //   UserCredential user =
-  //       await FirebaseAuth.instance.signInWithCredential(credential);
-  //   // ignore: use_build_context_synchronously
-  //   Navigator.pushReplacement(
-  //       context,
-  //       MaterialPageRoute(
-  //         builder: (context) => const HomePage(),
-  //       ));
-  //   // Once signed in, return the UserCredential
-  //   if (user.additionalUserInfo!.isNewUser) {
-  //     await addUser();
-  //   }
-  //   await updateUser();
-  //   print('ggg $user');
-  //   return user;
-  // }
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+    UserCredential user =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+    // ignore: use_build_context_synchronously
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HomePage(),
+        ));
+    // Once signed in, return the UserCredential
+    if (user.additionalUserInfo!.isNewUser) {
+      // await addUser();
+    }
+    // await updateUser();
+    return user;
+  }
 
   Future<String?> _authUser(LoginData data) async {
     debugPrint('Name: ${data.name}, Password: ${data.password}');
@@ -58,13 +58,13 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     }
     //if the email is verified successfully then only user can sign in
-    // IdTokenResult tokenResult =
-    //     await FirebaseAuth.instance.currentUser!.getIdTokenResult();
-    // bool emailVerified = tokenResult.claims!['email_verified'];
-    // print(emailVerified);
-    // if (!emailVerified) {
-    //   return 'Please verify your email first';
-    // }
+    IdTokenResult tokenResult =
+        await FirebaseAuth.instance.currentUser!.getIdTokenResult();
+    bool emailVerified = tokenResult.claims!['email_verified'];
+    print(emailVerified);
+    if (!emailVerified) {
+      return 'Please verify your email first';
+    }
     // update the current data of the user in every login
     // await updateUser();
     return null;
@@ -155,32 +155,32 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: EdgeInsets.only(
               top: (MediaQuery.of(context).size.height * 0.8),
             ),
-            // child: ElevatedButton.icon(
-            //   onPressed: () => _signInWithGoogle(),
-            //   icon: const Image(
-            //     image: AssetImage('assets/images/google.png'),
-            //     height: 24.0,
-            //   ),
-            //   label: const Text(
-            //     'Google',
-            //     style: TextStyle(
-            //       fontSize: 18.0,
-            //       fontWeight: FontWeight.bold,
-            //     ),
-            //   ),
-            //   style: ElevatedButton.styleFrom(
-            //     foregroundColor: Colors.black,
-            //     backgroundColor: Colors.white,
-            //     shape: RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.circular(24.0),
-            //     ),
-            //     padding: const EdgeInsets.symmetric(
-            //       horizontal: 12.0,
-            //       vertical: 8.0,
-            //     ),
-            //     elevation: 10,
-            //   ),
-            // ),
+            child: ElevatedButton.icon(
+              onPressed: () => _signInWithGoogle(),
+              icon: const Image(
+                image: AssetImage('assets/images/google.png'),
+                height: 24.0,
+              ),
+              label: const Text(
+                'Google',
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.black,
+                backgroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24.0),
+                ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                  vertical: 8.0,
+                ),
+                elevation: 10,
+              ),
+            ),
           ),
         ],
       ),
