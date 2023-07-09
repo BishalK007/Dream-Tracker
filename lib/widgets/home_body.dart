@@ -33,7 +33,7 @@ class _HomeBodyState extends State<HomeBody> {
             itemCount: listSnapShot.data!.length,
             itemBuilder: (context, index) {
               return HomeCard(
-                id: listSnapShot.data![index].id,
+                id: listSnapShot.data![index],
               );
             },
           );

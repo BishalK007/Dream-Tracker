@@ -7,7 +7,7 @@ import 'package:expandable_text/expandable_text.dart';
 
 class HomeCard extends StatefulWidget {
   const HomeCard({super.key, required this.id});
-  final id;
+  final String id;
 
   @override
   State<HomeCard> createState() => _HomeCardState();
@@ -17,12 +17,108 @@ class _HomeCardState extends State<HomeCard> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: getGoalItemStream(),
+      stream: getGoalItemStream(widget.id),
       builder: (context, itemSnapShot) {
-        if (itemSnapShot.connectionState == ConnectionState.waiting ||
-            itemSnapShot.hasError) {
+        if (itemSnapShot.hasError) {
           return const Center(
             child: Text('Dang!! Couldnt fetch data'),
+          );
+        } else if (itemSnapShot.connectionState == ConnectionState.waiting) {
+          return ExpansionTileCard(
+            leading: const Icon(Icons.circle),
+            title: const Text('Title'),
+            subtitle: const Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                //
+                //________ Progress Bar
+                //
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  child: LinearProgressIndicator(value: 1),
+                ),
+                //
+                // ______ amount text __
+                //
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      '50 / 100',
+                    )
+                  ],
+                ),
+              ],
+            ),
+            children: [
+              //
+              // __________ Expandable Text __//
+              //
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: ExpandableText(
+                  "Notes...",
+                  expandText: 'Show More',
+                  collapseText: 'Show Less',
+                ),
+              ),
+              //
+              // ____________ Ad Place __//
+              //
+              const AdPlace(),
+              //
+              // ____________ Buttons Place __//
+              //
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  //
+                  //________ Add Button ______//
+                  //
+                  ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(Icons.add),
+                    label: const Text('Add Money'),
+                  ),
+                  //
+                  //________ Three Buttons ______//
+                  //
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          // Handle button tap
+                        },
+                        child: Container(
+                          width: 50.0,
+                          height: 50.0,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFebddff),
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 7,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.share,
+                              color: Colors.white,
+                              size: 30.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
           );
         } else {
           //
