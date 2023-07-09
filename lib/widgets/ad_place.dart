@@ -69,7 +69,7 @@ class _AdPlaceState extends State<AdPlace> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: Image.network(
-                                  'http://5.imimg.com/data5/SELLER/Default/2023/5/311679433/TJ/GV/VN/22874813/hero-karizma-zmr-bike-500x500.jpg',
+                                  'https://stimg.cardekho.com/images/carexteriorimages/630x420/Kia/Sonet/8427/Kia-Sonet-HTX-DCT/1678435390655/front-left-side-47.jpg?tr=w-456',
                                   fit: BoxFit.cover,
                                 ),
                               ),
