@@ -279,11 +279,23 @@ class _HomeCardState extends State<HomeCard> {
                                                     text: widget.id));
                                                 Navigator.pop(context);
                                                 ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                        const SnackBar(
-                                                  content: Center(
-                                                    child: Text(
-                                                        'Text copied to clipboard'),
+                                                    .showSnackBar(SnackBar(
+                                                  padding: EdgeInsets.zero,
+                                                  content: Container(
+                                                    color:
+                                                        Colors.green.shade900,
+                                                    height: 50,
+                                                    child: const Center(
+                                                      child: Text(
+                                                        "Sync Id Copied to Clipboard",
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ),
                                                   ),
                                                 ));
                                               },

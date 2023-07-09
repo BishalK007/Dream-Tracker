@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dream_tracker/global_variables.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+
+import 'colors.dart';
 
 Stream<List<String>> getGoalListStream() {
   final uid = FirebaseAuth.instance.currentUser?.uid;
@@ -114,19 +117,74 @@ Future<void> addGoals(
   }
 }
 
-Future<void> addExistingGoal(String id) async {
-// Get a reference to the document you want to update
-  final userRef = FirebaseFirestore.instance
-      .collection('allUsers')
-      .doc(FirebaseAuth.instance.currentUser?.uid);
+Future<void> addExistingGoal(String id, BuildContext context) async {
+  final QuerySnapshot snapshot =
+      await FirebaseFirestore.instance.collection('allGoals').get();
+  final goalExists = snapshot.docs.map((doc) => doc.id).toList().contains(id);
+  //
+  //__ If id Does not exists globally_________//
+  //
+  if (!goalExists) {
+    // ignore: use_build_context_synchronously
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      padding: EdgeInsets.zero,
+      content: Container(
+        color: Colors.red.shade900,
+        height: 50,
+        child: const Center(
+          child: Text(
+            "Invalid Id",
+            style: TextStyle(
+                color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+    ));
+  } else {
+    //
+    //______ Check if goal Exists for curr user
+    //
+    bool goalExistsCurrUser = false;
 
-// Update the 'goals' list field in the document
-  userRef
-      .update({
-        'goals': FieldValue.arrayUnion([id])
-      })
-      .then((value) => print('Goal added successfully!'))
-      .catchError((error) => print('Error adding goal: $error'));
+    final User? user = FirebaseAuth.instance.currentUser;
+    final DocumentSnapshot<Map<String, dynamic>> snapshot =
+        await FirebaseFirestore.instance
+            .collection('allUsers')
+            .doc(user!.uid)
+            .get();
+    final List<dynamic> goals = snapshot.data()?['goals'] ?? [];
+    goalExistsCurrUser = goals.contains(id);
+
+    if (goalExistsCurrUser) {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        padding: EdgeInsets.zero,
+        content: Container(
+          color: Colors.green.shade900,
+          height: 50,
+          child: const Center(
+            child: Text(
+              "Already in Your Goals",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+      ));
+    } else {
+      // Update the 'goals' list field in the document
+      FirebaseFirestore.instance
+          .collection('allUsers')
+          .doc(FirebaseAuth.instance.currentUser?.uid)
+          .update({
+            'goals': FieldValue.arrayUnion([id])
+          })
+          .then((value) => print('Goal added successfully!'))
+          .catchError((error) => print('Error adding goal: $error'));
+    }
+  }
 }
 
 void addExistingGoalToAnotherUser(String goalId) {
