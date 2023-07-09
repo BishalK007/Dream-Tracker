@@ -27,7 +27,7 @@ class _FirebasePreferenceFetchWidgetState
   @override
   void initState() {
     // TODO: implement initState
-    _goalAmountController.text = widget.datalist!['goal_amount'].toString();
+    _goalAmountController.text = widget.datalist!['goalAmount'].toString();
     super.initState();
     _titleController.text = (widget.datalist!['id'] <= 6)
         ? preferences[widget.datalist!['id']]
@@ -55,10 +55,10 @@ class _FirebasePreferenceFetchWidgetState
             Text(
               "Enter preference details",
               style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  //color: myPrimarySwatch,
-                  ),
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                //color: myPrimarySwatch,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
@@ -73,7 +73,7 @@ class _FirebasePreferenceFetchWidgetState
                       const SizedBox(height: 16),
                       TextFormField(
                         style: const TextStyle(color: Colors.black),
-                        initialValue: widget.datalist!['preference'].toString(),
+                        initialValue: widget.datalist!['title'].toString(),
                         cursorColor: Colors.black,
                         decoration: const InputDecoration(
                           prefix: Icon(Icons.notes, size: 18),
@@ -83,15 +83,16 @@ class _FirebasePreferenceFetchWidgetState
                                   BorderRadius.all(Radius.circular(10))),
                           // enabledBorder: OutlineInputBorder(),
                         ),
-                        readOnly: true,
+                        // readOnly: true,
+                        enabled: false,
                       ),
                       const SizedBox(height: 16),
                       TextFormField(
                         style: const TextStyle(color: Colors.black),
-                        initialValue:
-                            widget.datalist!['description'].toString(),
+                        initialValue: widget.datalist!['notes'].toString(),
                         cursorColor: Colors.black,
-                        readOnly: true,
+                        // readOnly: true,
+                        enabled: false,
                         decoration: const InputDecoration(
                           prefix: Icon(Icons.book, size: 18),
                           labelText: 'Previous notes',
@@ -109,8 +110,8 @@ class _FirebasePreferenceFetchWidgetState
                             fit: FlexFit.loose,
                             child: TextFormField(
                               style: const TextStyle(color: Colors.black),
-                              initialValue: widget
-                                  .datalist!['required_amount_to_reach_goal']
+                              initialValue: (widget.datalist!['goalAmount'] -
+                                      widget.datalist!['amountSaved'])
                                   .toString(),
                               cursorColor: Colors.black,
                               decoration: const InputDecoration(
@@ -121,7 +122,8 @@ class _FirebasePreferenceFetchWidgetState
                                       BorderRadius.all(Radius.circular(10)),
                                 ),
                               ),
-                              readOnly: true,
+                              // readOnly: true,
+                              enabled: false,
                             ),
                           ),
                           const SizedBox(width: 5),
