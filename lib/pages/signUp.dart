@@ -130,6 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
             prefixIconColor: Colors.deepPurpleAccent.shade400,
             suffixIconColor: Colors.deepPurpleAccent.shade400,
           ),
+          textFieldStyle: const TextStyle(color: Colors.black),
           errorColor: Colors.deepPurpleAccent.shade400,
           primaryColor: myPrimarySwatch,
           accentColor: const Color(0xFFE12D2D),
