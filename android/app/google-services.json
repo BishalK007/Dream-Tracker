@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "399685021974",
-    "project_id": "dream-tracker-32810",
-    "storage_bucket": "dream-tracker-32810.appspot.com"
+    "project_number": "974845749682",
+    "project_id": "dreamtrackerh4b",
+    "storage_bucket": "dreamtrackerh4b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:399685021974:android:da1fd74f89e9b0b593a037",
+        "mobilesdk_app_id": "1:974845749682:android:4e36cd45454e7d10575cab",
         "android_client_info": {
           "package_name": "com.example.dream_tracker"
         }
       },
       "oauth_client": [
         {
-          "client_id": "399685021974-5kvrm1ape0qsl9hma6hobl1vapuie15q.apps.googleusercontent.com",
+          "client_id": "974845749682-s7gpnoc0fnvaf83hm3kkovi0olnnu96s.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC5ZzaCX2dAHb0_yWSdv7jYNY61_7sBwxE"
+          "current_key": "AIzaSyDNOcV2drTUj4nMIAQ6iO_FGIORkZ2sNg0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "399685021974-5kvrm1ape0qsl9hma6hobl1vapuie15q.apps.googleusercontent.com",
+              "client_id": "974845749682-iplmi9pql8p9s782ham1oeehmhud851t.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

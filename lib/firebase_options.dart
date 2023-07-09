@@ -50,20 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyC5Y8tZUFWwCQ0LBgW6ccRIxXJxHI7eC-I',
-    appId: '1:399685021974:web:ca0823fabfbb313693a037',
-    messagingSenderId: '399685021974',
-    projectId: 'dream-tracker-32810',
-    authDomain: 'dream-tracker-32810.firebaseapp.com',
-    storageBucket: 'dream-tracker-32810.appspot.com',
-    measurementId: 'G-D7TMRGKJ9L',
+    apiKey: 'AIzaSyCLFJtKWo9QOr6f-F6-ZRKlXktg0LhJzZs',
+    appId: '1:974845749682:web:95fd7856139bd299575cab',
+    messagingSenderId: '974845749682',
+    projectId: 'dreamtrackerh4b',
+    authDomain: 'dreamtrackerh4b.firebaseapp.com',
+    storageBucket: 'dreamtrackerh4b.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC5ZzaCX2dAHb0_yWSdv7jYNY61_7sBwxE',
-    appId: '1:399685021974:android:da1fd74f89e9b0b593a037',
-    messagingSenderId: '399685021974',
-    projectId: 'dream-tracker-32810',
-    storageBucket: 'dream-tracker-32810.appspot.com',
+    apiKey: 'AIzaSyDNOcV2drTUj4nMIAQ6iO_FGIORkZ2sNg0',
+    appId: '1:974845749682:android:4e36cd45454e7d10575cab',
+    messagingSenderId: '974845749682',
+    projectId: 'dreamtrackerh4b',
+    storageBucket: 'dreamtrackerh4b.appspot.com',
   );
 }
