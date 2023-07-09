@@ -34,7 +34,7 @@ class _OnBoardingState extends State<OnBoarding> {
             height: 300,
           ),
           title: Text(
-            "Step into a world of financial clarity and control. Let [App Name] be your trusted guide to a brighter financial future.",
+            "Step into a world of financial clarity and control. Let DreamTracker be your trusted guide to a brighter financial future.",
             style: textStyle,
             textAlign: TextAlign.center,
           ),
@@ -46,7 +46,7 @@ class _OnBoardingState extends State<OnBoarding> {
             height: 300,
           ),
           title: Text(
-            "Experience the joy of mindful spending. [App Name] helps you make informed choices, ensuring your money aligns with your dreams.",
+            "Experience the joy of mindful spending. DreamTracker helps you make informed choices, ensuring your money aligns with your dreams.",
             style: textStyle,
             textAlign: TextAlign.center,
           ),
@@ -58,7 +58,7 @@ class _OnBoardingState extends State<OnBoarding> {
             height: 300,
           ),
           title: Text(
-            "Experience the joy of mindful spending. [App Name] helps you make informed choices, ensuring your money aligns with your dreams.",
+            "Experience the joy of mindful spending. DreamTracker helps you make informed choices, ensuring your money aligns with your dreams.",
             style: textStyle,
             textAlign: TextAlign.center,
           ),
