@@ -72,7 +72,7 @@ class _HomeCardState extends State<HomeCard> {
               //
               // ____________ Ad Place __//
               //
-              const AdPlace(),
+              Container(),
               //
               // ____________ Buttons Place __//
               //
@@ -181,21 +181,26 @@ class _HomeCardState extends State<HomeCard> {
             ),
             children: [
               //
-              // __________ Expandable Text __//
+              // __________ Expandable Description Text __//
               //
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: ExpandableText(
-                  itemSnapShot.data!.notes,
-                  expandText: 'Show More',
-                  collapseText: 'Show Less',
+              Container(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: ExpandableText(
+                    'Notes : ${itemSnapShot.data!.notes}',
+                    expandText: 'Show More',
+                    collapseText: 'Show Less',
+                  ),
                 ),
               ),
               //
               // ____________ Ad Place __//
               //
-              const AdPlace(),
+              AdPlace(
+                  goalAmt: itemSnapShot.data!.goalAmount,
+                  title: itemSnapShot.data!.id),
               //
               // ____________ Buttons Place __//
               //
