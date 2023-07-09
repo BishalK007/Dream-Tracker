@@ -103,14 +103,14 @@ class _HomeCardState extends State<HomeCard> {
                           width: 50.0,
                           height: 50.0,
                           decoration: BoxDecoration(
-                            color: Color(0xFFebddff),
+                            color: const Color(0xFFebddff),
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey.withOpacity(0.5),
                                 spreadRadius: 2,
                                 blurRadius: 7,
-                                offset: Offset(0, 3),
+                                offset: const Offset(0, 3),
                               ),
                             ],
                           ),
@@ -241,7 +241,7 @@ class _HomeCardState extends State<HomeCard> {
                               showModalBottomSheet(
                                 isScrollControlled: true,
                                 context: context,
-                                builder: (context) => Container(
+                                builder: (context) => SizedBox(
                                   height: 120,
                                   child: Column(
                                     children: [
@@ -315,7 +315,7 @@ class _HomeCardState extends State<HomeCard> {
                               showModalBottomSheet(
                                 isScrollControlled: true,
                                 context: context,
-                                builder: (context) => Container(
+                                builder: (context) => SizedBox(
                                   height: 170,
                                   child: Column(
                                     children: [
@@ -382,7 +382,7 @@ class _HomeCardState extends State<HomeCard> {
                                   color: Colors.grey.withOpacity(0.5),
                                   spreadRadius: 2,
                                   blurRadius: 7,
-                                  offset: Offset(0, 3),
+                                  offset: const Offset(0, 3),
                                 ),
                               ],
                             ),

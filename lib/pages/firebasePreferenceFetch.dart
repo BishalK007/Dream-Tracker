@@ -48,11 +48,11 @@ class _FirebasePreferenceFetchWidgetState
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Icon(
+            const Icon(
               Icons.horizontal_rule,
               //color: myPrimarySwatch,
             ),
-            Text(
+            const Text(
               "Enter preference details",
               style: TextStyle(
                 fontSize: 20,
