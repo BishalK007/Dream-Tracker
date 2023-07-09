@@ -114,23 +114,19 @@ Future<void> addGoals(
   }
 }
 
-Future<Map<String, dynamic>?> addExistingGoal(String id) async {
-  Map<String, dynamic>? data;
-  try {
-    DocumentSnapshot<Object?> existingGoal = await goals.doc(id).get();
-    print(existingGoal);
-    data = existingGoal.data() as Map<String, dynamic>?;
-    // Access the data from the document
-    if (data != null) {
-      return data;
-    } else {
-      print(data);
-      return data;
-    }
-  } catch (error) {
-    print("Error during fetching the existing goal: $error");
-  }
-  return data;
+Future<void> addExistingGoal(String id) async {
+// Get a reference to the document you want to update
+  final userRef = FirebaseFirestore.instance
+      .collection('allUsers')
+      .doc(FirebaseAuth.instance.currentUser?.uid);
+
+// Update the 'goals' list field in the document
+  userRef
+      .update({
+        'goals': FieldValue.arrayUnion([id])
+      })
+      .then((value) => print('Goal added successfully!'))
+      .catchError((error) => print('Error adding goal: $error'));
 }
 
 void addExistingGoalToAnotherUser(String goalId) {

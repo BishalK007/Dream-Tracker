@@ -1,5 +1,3 @@
-import 'package:dream_tracker/colors.dart';
-import 'package:dream_tracker/pages/editPreferenceDetails.dart';
 import 'package:dream_tracker/pages/preference_selection_page.dart';
 import 'package:dream_tracker/pages/signUp.dart';
 import 'package:dream_tracker/widgets/home_body.dart';

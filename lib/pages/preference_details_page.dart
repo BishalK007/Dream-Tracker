@@ -15,7 +15,7 @@ class PreferenceDetails extends StatefulWidget {
 
 class _PreferenceDetailsState extends State<PreferenceDetails> {
   final _formKey = GlobalKey<FormState>();
-  var _nameController = TextEditingController();
+  final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _goalAmtController = TextEditingController();
 
