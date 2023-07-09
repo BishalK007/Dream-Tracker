@@ -29,7 +29,7 @@ class _HomeCardState extends State<HomeCard> {
           );
         } else if (itemSnapShot.connectionState == ConnectionState.waiting) {
           return ExpansionTileCard(
-            leading: const Icon(Icons.circle),
+            leading: Icon(icons[0]),
             title: const Text('Title'),
             subtitle: const Column(
               mainAxisSize: MainAxisSize.min,
@@ -129,7 +129,7 @@ class _HomeCardState extends State<HomeCard> {
           //____ Expansion Card ______//
           //
           return ExpansionTileCard(
-            leading: const Icon(Icons.abc),
+            leading: Icon(icons[itemSnapShot.data!.index]),
             title: Text(itemSnapShot.data!.title),
             subtitle: Column(
               mainAxisSize: MainAxisSize.min,

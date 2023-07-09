@@ -24,16 +24,17 @@ List<IconData> icons = [
 ];
 
 class GoalData {
+  final int index;
   final String id;
   final String title;
   final String notes;
   final int amountSaved;
   final int goalAmount;
-  GoalData({
-    required this.amountSaved,
-    required this.goalAmount,
-    required this.id,
-    required this.notes,
-    required this.title,
-  });
+  GoalData(
+      {required this.amountSaved,
+      required this.goalAmount,
+      required this.id,
+      required this.notes,
+      required this.title,
+      required this.index});
 }

@@ -34,12 +34,14 @@ Stream<GoalData> getGoalItemStream(String id) {
         id: id,
         notes: 'notes...',
         title: "title....",
+        index: 0,
       );
     }
     return GoalData(
       amountSaved: snapShot.data()!['amountSaved'],
       goalAmount: snapShot.data()!['goalAmount'],
       id: id,
+      index: snapShot.data()!['id'],
       notes: snapShot.data()!['notes'],
       title: snapShot.data()!['title'],
     );

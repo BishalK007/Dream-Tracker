@@ -104,7 +104,10 @@ class _SelectPreferenceState extends State<SelectPreference> {
                         id: index,
                         icon: icons[index],
                         name: preferences[index]);
-                  })
+                  }),
+              const SizedBox(
+                height: 10,
+              ),
             ],
           ),
         ),
