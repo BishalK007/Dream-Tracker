@@ -1,3 +1,4 @@
+import 'package:dream_tracker/colors.dart';
 import 'package:dream_tracker/firebase_options.dart';
 import 'package:dream_tracker/pages/onboarding.dart';
 import 'package:dream_tracker/pages/signUp.dart';
@@ -20,10 +21,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Dream Tracker',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: ThemeData(primarySwatch: myPrimarySwatch
+          // useMaterial3: true,
+          ),
       debugShowCheckedModeBanner: false,
       home: FutureBuilder<User?>(
         future: FirebaseAuth.instance.authStateChanges().first,
