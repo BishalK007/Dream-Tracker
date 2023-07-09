@@ -31,7 +31,8 @@ class _SelectPreferenceState extends State<SelectPreference> {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: preferences.length,
                 itemBuilder: (context, index) {
-                  return const PreferenceCards();
+                  return PreferenceCards(
+                      id: index, icon: icons[index], name: preferences[index]);
                 })
           ],
         ),
