@@ -1,3 +1,4 @@
+import 'package:dream_tracker/pages/preference_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -21,6 +22,14 @@ class _PreferenceCardsState extends State<PreferenceCards> {
       child: InkWell(
         onTap: () {
           print(widget.id);
+          showModalBottomSheet(
+            isScrollControlled: true,
+            context: context,
+            builder: (context) => FractionallySizedBox(
+              heightFactor: 0.8,
+              child: PreferenceDetails(preference: widget.name),
+            ),
+          );
         },
         child: ListTile(
           leading: Icon(widget.icon),

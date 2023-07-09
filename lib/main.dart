@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
           // User is not signed in
           else {
             if (!snapshot.hasData) {
-              return LoginScreen();
+              return HomePage();
             }
             // User is signed in
             return const HomePage();
