@@ -146,6 +146,18 @@ void addExistingGoalToAnotherUser(String goalId) {
   }
 }
 
+Future<void> updateDetails(
+    String description, int goalAmt, String goalId) async {
+  try {
+    goals.doc(goalId).update({
+      'notes': description,
+      'goalAmount': goalAmt,
+    });
+  } catch (e) {
+    print('Error occured during $e');
+  }
+}
+
 void deleteGoal(String goalItem) async {
   final currentUserUid = FirebaseAuth.instance.currentUser!.uid;
   final allUsersRef =
@@ -153,4 +165,26 @@ void deleteGoal(String goalItem) async {
   await allUsersRef.update({
     'goals': FieldValue.arrayRemove([goalItem])
   });
+}
+
+Future<List<AdPlaceItem>> fetchAdPlaceItems(String goal, int goalPrice) async {
+  QuerySnapshot snapshot = await FirebaseFirestore.instance
+      .collection(goal)
+      .where("Price", isLessThanOrEqualTo: goalPrice)
+      .orderBy("Price")
+      .get();
+  List<AdPlaceItem> adPlaceItems = snapshot.docs.map((doc) {
+    Map<String, dynamic> data = (doc.data() as Map<String, dynamic>);
+    // print(data);
+    print(data['Product Url']);
+    return AdPlaceItem(
+      title: data['Title'],
+      description: data['Description'],
+      price: data['Price'],
+      imgLink: data['Image Link'],
+      productLink: data['Product Url'],
+    );
+  }).toList();
+  // print("hii $adPlaceItems");
+  return Future.value(adPlaceItems);
 }

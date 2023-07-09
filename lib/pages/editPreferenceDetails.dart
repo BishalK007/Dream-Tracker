@@ -1,5 +1,6 @@
 //import 'package:auth_testing/backend/database.dart';
 import 'package:flutter/material.dart';
+import '../backend.dart';
 import '../colors.dart';
 
 class EditPrederence extends StatefulWidget {
@@ -165,13 +166,11 @@ class _EditPrederenceState extends State<EditPrederence> {
                             ),
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                // updateDetails(
-                                //   _descriptionController.text,
-                                //   int.parse(_goalAmtController.text),
-                                //   int.parse(_goalAmtController.text) -
-                                //       int.parse(_savedAmtController.text),
-                                //   widget.goalId,
-                                // );
+                                updateDetails(
+                                  _descriptionController.text,
+                                  int.parse(_goalAmtController.text),
+                                  widget.goalId,
+                                );
                                 Navigator.pop(context);
                               }
                             },
