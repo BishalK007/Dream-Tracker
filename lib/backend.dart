@@ -239,9 +239,10 @@ Future<List<AdPlaceItem>> fetchAdPlaceItems(String goal, int goalPrice) async {
       .where("Price", isLessThanOrEqualTo: goalPrice)
       .orderBy("Price")
       .get();
+  // print(snapshot);
   List<AdPlaceItem> adPlaceItems = snapshot.docs.map((doc) {
     Map<String, dynamic> data = (doc.data() as Map<String, dynamic>);
-    // print(data);
+    print("hi");
     print(data['Product Url']);
     return AdPlaceItem(
       title: data['Title'],
