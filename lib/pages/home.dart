@@ -115,28 +115,15 @@ class _HomePageState extends State<HomePage> {
           children: [
             FloatingActionButton(
               onPressed: () {
-                // showModalBottomSheet(
-                //   isScrollControlled: true,
-                //   context: context,
-                //   builder: (context) => const FractionallySizedBox(
-                //     heightFactor: 0.8,
-                //     child: SelectPreference(),
-                //   ),
-                // );
                 showModalBottomSheet(
-                    isScrollControlled: true,
-                    context: context,
-                    builder: (context) => FractionallySizedBox(
-                          heightFactor: 0.8,
-                          child: EditPrederence(
-                            description: 'abcd',
-                            goalAmt: 0,
-                            goalId: 'o',
-                            preference: 'aa',
-                            savedAmt: 10,
-                            //key: ,
-                          ),
-                        ));
+                  isScrollControlled: true,
+                  context: context,
+                  builder: (context) => const FractionallySizedBox(
+                    heightFactor: 0.8,
+                    child: SelectPreference(),
+                  ),
+                );
+                
               },
               child: const Icon(Icons.add),
             ),
