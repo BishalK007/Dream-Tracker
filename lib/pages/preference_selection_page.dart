@@ -57,7 +57,6 @@ class _SelectPreferenceState extends State<SelectPreference> {
                           onTap: () async {
                             Map<String, dynamic>? datalist =
                                 await addExistingGoal(_syncController.text);
-                            print(datalist);
                             // ignore: use_build_context_synchronously
                             showModalBottomSheet(
                                 context: context,

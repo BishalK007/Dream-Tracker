@@ -131,7 +131,6 @@ class _PreferenceDetailsState extends State<PreferenceDetails> {
                                 shape: const StadiumBorder(),
                                 fixedSize: const Size(100, 50)),
                             onPressed: () {
-                              //todo submit
                               if (_formKey.currentState!.validate()) {
                                 addGoals(
                                     widget.preference,

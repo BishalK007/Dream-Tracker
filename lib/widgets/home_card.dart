@@ -1,6 +1,7 @@
 import 'package:dream_tracker/backend.dart';
 import 'package:dream_tracker/colors.dart';
 import 'package:dream_tracker/global_variables.dart';
+import 'package:dream_tracker/pages/add_money_page.dart';
 import 'package:dream_tracker/widgets/ad_place.dart';
 import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
@@ -39,7 +40,9 @@ class _HomeCardState extends State<HomeCard> {
                 //
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
-                  child: LinearProgressIndicator(value: 1),
+                  child: LinearProgressIndicator(
+                    value: 1,
+                  ),
                 ),
                 //
                 // ______ amount text __
@@ -80,7 +83,9 @@ class _HomeCardState extends State<HomeCard> {
                   //________ Add Button ______//
                   //
                   ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      print("Add m");
+                    },
                     icon: const Icon(Icons.add),
                     label: const Text('Add Money'),
                   ),
@@ -145,6 +150,13 @@ class _HomeCardState extends State<HomeCard> {
                         ? 1
                         : itemSnapShot.data!.amountSaved /
                             itemSnapShot.data!.goalAmount,
+                    color: (itemSnapShot.data!.amountSaved >
+                            itemSnapShot.data!.goalAmount)
+                        ? Colors.red.shade900
+                        : (itemSnapShot.data!.amountSaved ==
+                                itemSnapShot.data!.goalAmount)
+                            ? Colors.green.shade800
+                            : myPrimarySwatch,
                   ),
                 ),
                 //
@@ -157,7 +169,10 @@ class _HomeCardState extends State<HomeCard> {
                       (itemSnapShot.data!.amountSaved >
                               itemSnapShot.data!.goalAmount)
                           ? 'Exceeded!!  '
-                          : ' ',
+                          : (itemSnapShot.data!.amountSaved ==
+                                  itemSnapShot.data!.goalAmount)
+                              ? 'Goal Reached!!  '
+                              : ' ',
                     ),
                     Text(
                       '${itemSnapShot.data!.amountSaved}/${itemSnapShot.data!.goalAmount}',
@@ -193,7 +208,21 @@ class _HomeCardState extends State<HomeCard> {
                   //________ Add Button ______//
                   //
                   ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      showModalBottomSheet(
+                        isScrollControlled: true,
+                        context: context,
+                        builder: (context) => FractionallySizedBox(
+                          heightFactor: 0.8,
+                          child: AddMoney(
+                              goalId: itemSnapShot.data!.id,
+                              preference: itemSnapShot.data!.title,
+                              description: itemSnapShot.data!.notes,
+                              savedAmt: itemSnapShot.data!.amountSaved,
+                              goalAmt: itemSnapShot.data!.goalAmount),
+                        ),
+                      );
+                    },
                     icon: const Icon(Icons.add),
                     label: const Text('Add Money'),
                   ),
@@ -270,21 +299,18 @@ class _HomeCardState extends State<HomeCard> {
                               );
                             } else if (index == 2) {
                               showModalBottomSheet(
-                                isScrollControlled: true,
-                                context: context,
-                                builder: (context) =>
-                                    const FractionallySizedBox(
-                                  heightFactor: 0.82,
-                                  child: EditPrederence(
-                                    description: 'abcd',
-                                    goalAmt: 0,
-                                    goalId: 'o',
-                                    preference: 'aa',
-                                    savedAmt: 10,
-                                    //key: ,
-                                  ),
-                                ),
-                              );
+                                  isScrollControlled: true,
+                                  context: context,
+                                  builder: (context) => FractionallySizedBox(
+                                      heightFactor: 0.8,
+                                      child: EditPrederence(
+                                        description: itemSnapShot.data!.notes,
+                                        goalAmt: itemSnapShot.data!.goalAmount,
+                                        goalId: itemSnapShot.data!.id,
+                                        preference: itemSnapShot.data!.title,
+                                        savedAmt:
+                                            itemSnapShot.data!.amountSaved,
+                                      )));
                             } else {
                               showModalBottomSheet(
                                 isScrollControlled: true,
