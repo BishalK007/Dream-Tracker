@@ -5,12 +5,11 @@ import 'package:flutter_login/flutter_login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //import 'dashboard_screen.dart';
-
-// Login --> Firebase
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   Duration get loginTime => const Duration(milliseconds: 1000);
+  // Login --> Firebase
   Future<String?> _authUser(LoginData data) {
     debugPrint('Name: ${data.name}, Password: ${data.password}');
     return Future.delayed(loginTime).then((_) async {
@@ -29,7 +28,7 @@ class LoginScreen extends StatelessWidget {
       return null;
     });
   }
-
+  
   Future<String?> _signupUser(SignupData data) {
     debugPrint('Signup Name: ${data.name}, Password: ${data.password}');
     return Future.delayed(loginTime).then((_) async {
