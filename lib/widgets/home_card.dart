@@ -242,190 +242,198 @@ class _HomeCardState extends State<HomeCard> {
                   //
                   //________ Three Buttons ______//
                   //
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: List.generate(3, (index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 7),
-                        child: InkWell(
-                          onTap: () {
-                            // Handle button tap
-                            if (index == 0) {
-                              showModalBottomSheet(
-                                isScrollControlled: true,
-                                context: context,
-                                builder: (context) => SizedBox(
-                                  height: 120,
-                                  child: Column(
-                                    children: [
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        "Share your goal",
-                                        style: TextStyle(
-                                            color: myPrimarySwatch,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: Center(
-                                              child: Text(
-                                                widget.id,
-                                                style: const TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 12.5),
-                                            child: IconButton(
-                                              icon: const Icon(Icons.copy),
-                                              onPressed: () {
-                                                Clipboard.setData(ClipboardData(
-                                                    text: widget.id));
-                                                Navigator.pop(context);
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(SnackBar(
-                                                  padding: EdgeInsets.zero,
-                                                  content: Container(
-                                                    color:
-                                                        Colors.green.shade900,
-                                                    height: 50,
-                                                    child: const Center(
-                                                      child: Text(
-                                                        "Sync Id Copied to Clipboard",
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ));
-                                              },
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              );
-                            } else if (index == 2) {
-                              showModalBottomSheet(
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 15),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: List.generate(3, (index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 7),
+                          child: InkWell(
+                            onTap: () {
+                              // Handle button tap
+                              if (index == 0) {
+                                showModalBottomSheet(
                                   isScrollControlled: true,
                                   context: context,
-                                  builder: (context) => FractionallySizedBox(
-                                      heightFactor: 0.8,
-                                      child: EditPrederence(
-                                        description: itemSnapShot.data!.notes,
-                                        goalAmt: itemSnapShot.data!.goalAmount,
-                                        goalId: itemSnapShot.data!.id,
-                                        preference: itemSnapShot.data!.title,
-                                        savedAmt:
-                                            itemSnapShot.data!.amountSaved,
-                                      )));
-                            } else {
-                              showModalBottomSheet(
-                                isScrollControlled: true,
-                                context: context,
-                                builder: (context) => SizedBox(
-                                  height: 170,
-                                  child: Column(
-                                    children: [
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            0, 20, 0, 30),
-                                        child: Text(
-                                          "Want to Delete Your Goal?",
+                                  builder: (context) => SizedBox(
+                                    height: 120,
+                                    child: Column(
+                                      children: [
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          "Share your goal",
                                           style: TextStyle(
                                               color: myPrimarySwatch,
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: List.generate(2, (index) {
-                                          return Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 10),
-                                            child: ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                fixedSize: const Size(100, 50),
-                                                //backgroundColor: Colors.black,
-                                                shape:
-                                                    const StadiumBorder(), // Background color
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Center(
+                                                child: Text(
+                                                  widget.id,
+                                                  style: const TextStyle(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
                                               ),
-                                              onPressed: () {
-                                                if (index == 0) {
-                                                  Navigator.pop(context);
-                                                } else {
-                                                  deleteGoal(widget.id);
-                                                  Navigator.pop(context);
-                                                }
-                                              },
-                                              child: (index == 0)
-                                                  ? const Text('Cancel')
-                                                  : const Text('Delete'),
                                             ),
-                                          );
-                                        }),
-                                      )
-                                    ],
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 12.5),
+                                              child: IconButton(
+                                                icon: const Icon(Icons.copy),
+                                                onPressed: () {
+                                                  Clipboard.setData(
+                                                      ClipboardData(
+                                                          text: widget.id));
+                                                  Navigator.pop(context);
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(SnackBar(
+                                                    padding: EdgeInsets.zero,
+                                                    content: Container(
+                                                      color:
+                                                          Colors.green.shade900,
+                                                      height: 50,
+                                                      child: const Center(
+                                                        child: Text(
+                                                          "Sync Id Copied to Clipboard",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ));
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
                                   ),
+                                );
+                              } else if (index == 2) {
+                                showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    context: context,
+                                    builder: (context) => FractionallySizedBox(
+                                        heightFactor: 0.8,
+                                        child: EditPrederence(
+                                          description: itemSnapShot.data!.notes,
+                                          goalAmt:
+                                              itemSnapShot.data!.goalAmount,
+                                          goalId: itemSnapShot.data!.id,
+                                          preference: itemSnapShot.data!.title,
+                                          savedAmt:
+                                              itemSnapShot.data!.amountSaved,
+                                        )));
+                              } else {
+                                showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  context: context,
+                                  builder: (context) => SizedBox(
+                                    height: 170,
+                                    child: Column(
+                                      children: [
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              0, 20, 0, 30),
+                                          child: Text(
+                                            "Want to Delete Your Goal?",
+                                            style: TextStyle(
+                                                color: myPrimarySwatch,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: List.generate(2, (index) {
+                                            return Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                              child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  fixedSize:
+                                                      const Size(100, 50),
+                                                  //backgroundColor: Colors.black,
+                                                  shape:
+                                                      const StadiumBorder(), // Background color
+                                                ),
+                                                onPressed: () {
+                                                  if (index == 0) {
+                                                    Navigator.pop(context);
+                                                  } else {
+                                                    deleteGoal(widget.id);
+                                                    Navigator.pop(context);
+                                                  }
+                                                },
+                                                child: (index == 0)
+                                                    ? const Text('Cancel')
+                                                    : const Text('Delete'),
+                                              ),
+                                            );
+                                          }),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              }
+                            },
+                            child: Container(
+                              width: 40.0,
+                              height: 40.0,
+                              decoration: BoxDecoration(
+                                color: myPrimarySwatch,
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 2,
+                                    blurRadius: 7,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  (index == 0)
+                                      ? Icons.share
+                                      : (index == 1)
+                                          ? Icons.delete
+                                          : Icons.edit,
+                                  color: Colors.white,
+                                  size: 30.0,
                                 ),
-                              );
-                            }
-                          },
-                          child: Container(
-                            width: 40.0,
-                            height: 40.0,
-                            decoration: BoxDecoration(
-                              color: myPrimarySwatch,
-                              shape: BoxShape.circle,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 7,
-                                  offset: const Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            child: Center(
-                              child: Icon(
-                                (index == 0)
-                                    ? Icons.share
-                                    : (index == 1)
-                                        ? Icons.delete
-                                        : Icons.edit,
-                                color: Colors.white,
-                                size: 30.0,
                               ),
                             ),
                           ),
-                        ),
-                      );
-                    }),
+                        );
+                      }),
+                    ),
                   ),
                 ],
               ),
