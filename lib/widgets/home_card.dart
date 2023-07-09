@@ -12,6 +12,7 @@ import '../pages/editPreferenceDetails.dart';
 class HomeCard extends StatefulWidget {
   const HomeCard({super.key, required this.id});
   final String id;
+  
 
   @override
   State<HomeCard> createState() => _HomeCardState();
