@@ -133,7 +133,7 @@ class _PreferenceDetailsState extends State<PreferenceDetails> {
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 addGoals(
-                                    widget.preference,
+                                    _nameController.text,
                                     _descriptionController.text,
                                     int.parse(_goalAmtController.text),
                                     widget.id);
