@@ -38,6 +38,7 @@ dependencies:
   font_awesome_flutter: ^10.5.0
   firebase_core: ^2.14.0
   hidable: ^1.0.4
+  flutter_login: ^4.1.1
 
 dev_dependencies:
   flutter_test:
