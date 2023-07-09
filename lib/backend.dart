@@ -1,6 +1,6 @@
 import 'package:dream_tracker/global_variables.dart';
 
-Stream<List<GoalData>> getGoalDataStream() async* {
+Stream<List<GoalData>> getGoalListStream() async* {
   List<GoalData> goals = [
     GoalData(
         id: "1",
@@ -24,6 +24,21 @@ Stream<List<GoalData>> getGoalDataStream() async* {
 
   while (true) {
     yield goals;
+    await Future.delayed(Duration(seconds: 5));
+  }
+}
+
+Stream<GoalData> getGoalItemStream() async* {
+  GoalData goal = GoalData(
+    id: "1",
+    title: "Save up for a new car",
+    notes: "I need a reliable car for work",
+    amountSaved: 5000,
+    goalAmount: 20000,
+  );
+
+  while (true) {
+    yield goal;
     await Future.delayed(Duration(seconds: 5));
   }
 }

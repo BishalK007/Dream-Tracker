@@ -12,7 +12,7 @@ class _HomeBodyState extends State<HomeBody> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: getGoalDataStream(),
+      stream: getGoalListStream(),
       builder: (context, ListSnapShot) {
         if (ListSnapShot.connectionState == ConnectionState.waiting) {
           return const Center(
