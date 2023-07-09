@@ -3,9 +3,7 @@ import 'package:dream_tracker/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-String text =
-    'ifjiwejfisemfejfmsfijmifshfmusdmfsyfsiusu08ufsd9asid9is0d9ifsdmyguds9v0uas09usauyd8ushfhashjasgjgasgasgdgasdgasdgasdjgasgastdgasygyjasgyasgyasgcyasgcjysgcyasg';
+import 'package:url_launcher/url_launcher.dart';
 
 class AdPlace extends StatefulWidget {
   const AdPlace({super.key, required this.goalAmt, required this.title});
@@ -21,7 +19,7 @@ class _AdPlaceState extends State<AdPlace> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
+      child: SizedBox(
         height: 350,
         // color: Colors.amber,
         child: FutureBuilder(
@@ -31,13 +29,15 @@ class _AdPlaceState extends State<AdPlace> {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (snapshot.hasError || !snapshot.hasData) {
+            } else if (snapshot.hasError ||
+                !snapshot.hasData ||
+                snapshot.data!.isEmpty) {
               return const Center(
                 child: Text('Something Went Wrong..'),
               );
             } else {
               double screenWidth = MediaQuery.of(context).size.width;
-              print(snapshot.data!);
+              // print(snapshot.data!);
               //
               //______Ad Place Slider___
               //
@@ -69,7 +69,7 @@ class _AdPlaceState extends State<AdPlace> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: Image.network(
-                                  'http://5.imimg.com/data5/SELLER/Default/2023/5/311679433/TJ/GV/VN/22874813/hero-karizma-zmr-bike-500x500.jpg',
+                                  snapshot.data![index]['Image Link'],
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -89,7 +89,9 @@ class _AdPlaceState extends State<AdPlace> {
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 12),
                                   child: Text(
-                                    'Title : $text',
+                                    // ignore: prefer_interpolation_to_compose_strings
+                                    "Title: " + snapshot.data![index]['Title'],
+                                    // 'Title : $text',
                                     style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
@@ -104,8 +106,11 @@ class _AdPlaceState extends State<AdPlace> {
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 12),
                                   child: Text(
-                                    'Price : $text',
-                                    style: TextStyle(
+                                    // ignore: prefer_interpolation_to_compose_strings
+                                    'Price : ' +
+                                        snapshot.data![index]['Price']
+                                            .toString(),
+                                    style: const TextStyle(
                                       fontSize: 16,
                                     ),
                                     maxLines: 2,
@@ -116,7 +121,10 @@ class _AdPlaceState extends State<AdPlace> {
                                 //___ Visit Button __
                                 //
                                 ElevatedButton.icon(
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    await launchUrl(Uri.parse(
+                                        snapshot.data![index]['Product Url']));
+                                  },
                                   icon: const Icon(FontAwesomeIcons.globe),
                                   label: const Text('Visit'),
                                 ),
@@ -143,7 +151,7 @@ class _AdPlaceState extends State<AdPlace> {
                         padding: const EdgeInsets.symmetric(
                             vertical: 5, horizontal: 10),
                         child: Text(
-                          text,
+                          snapshot.data![index]['Description'],
                           style: TextStyle(fontSize: 16),
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,

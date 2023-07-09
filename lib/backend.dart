@@ -233,27 +233,15 @@ void deleteGoal(String goalItem) async {
   });
 }
 
-Future<List<AdPlaceItem>> fetchAdPlaceItems(String goal, int goalPrice) async {
+Future<List<dynamic>> fetchAdPlaceItems(String goal, int goalPrice) async {
   QuerySnapshot snapshot = await FirebaseFirestore.instance
       .collection(goal)
       .where("Price", isLessThanOrEqualTo: goalPrice)
       .orderBy("Price")
       .get();
-  // print(snapshot);
-  List<AdPlaceItem> adPlaceItems = snapshot.docs.map((doc) {
+  List<dynamic> adPlaceItems = snapshot.docs.map((doc) {
     Map<String, dynamic> data = (doc.data() as Map<String, dynamic>);
-    print("hi");
-    print(data['Product Url']);
-    return AdPlaceItem(
-      title: data['Title'],
-      description: data['Description'],
-      price: data['Price'],
-      imgLink: data['Image Link'],
-      productLink: data['Product Url'],
-    );
+    return data;
   }).toList();
-  // print("hii $adPlaceItems");
-  return Future.value(adPlaceItems);
+  return adPlaceItems;
 }
-
-

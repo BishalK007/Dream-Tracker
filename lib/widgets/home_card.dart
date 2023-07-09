@@ -209,8 +209,9 @@ class _HomeCardState extends State<HomeCard> {
               // ____________ Ad Place __//
               //
               AdPlace(
-                  goalAmt: itemSnapShot.data!.goalAmount,
-                  title: itemSnapShot.data!.id),
+                goalAmt: itemSnapShot.data!.goalAmount,
+                title: itemSnapShot.data!.title,
+              ),
               //
               // ____________ Buttons Place __//
               //
