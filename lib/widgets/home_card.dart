@@ -83,9 +83,7 @@ class _HomeCardState extends State<HomeCard> {
                   //________ Add Button ______//
                   //
                   ElevatedButton.icon(
-                    onPressed: () {
-                      print("Add m");
-                    },
+                    onPressed: () {},
                     icon: const Icon(Icons.add),
                     label: const Text('Add Money'),
                   ),
