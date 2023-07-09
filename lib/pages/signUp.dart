@@ -40,41 +40,84 @@ class LoginScreen extends StatelessWidget {
     });
   }
 
-  Future<String> _recoverPassword(String name) {
+  Future<String?> _recoverPassword(String name) {
     debugPrint('Name: $name');
-    return Future.delayed(loginTime).then((_) {
-      // if (!users.containsKey(name)) {
-      //   return 'User not exists';
-      // }
-      return "null";
+    return Future.delayed(loginTime).then((_) async {
+      try {
+        await FirebaseAuth.instance.sendPasswordResetEmail(email: name);
+      } on FirebaseAuthException catch (e) {
+        return e.code;
+      }
+      return null;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return FlutterLogin(
-      //title: 'ECORP',
-      //logo: AssetImage('assets/images/ecorp-lightblue.png'),
-      onLogin: _authUser,
-      onSignup: _signupUser,
-      loginProviders: <LoginProvider>[
-        LoginProvider(
-          icon: FontAwesomeIcons.google,
-          label: 'Google',
-          callback: () async {
-            debugPrint('start google sign in');
-            await Future.delayed(loginTime);
-            debugPrint('stop google sign in');
-            return null;
-          },
+    return Scaffold(
+      body: FlutterLogin(
+        messages: LoginMessages(
+          recoverPasswordDescription:
+              'We will send a password recovery link to you to this email account',
         ),
-      ],
-      onSubmitAnimationCompleted: () {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => const HomePage(),
-        ));
-      },
-      onRecoverPassword: _recoverPassword,
+        theme: LoginTheme(
+          inputTheme: const InputDecorationTheme(
+            prefixIconColor: Color.fromARGB(255, 248, 132, 254),
+            suffixIconColor: Color.fromARGB(255, 248, 132, 254),
+          ),
+          errorColor: Colors.deepPurpleAccent.shade400,
+          primaryColor: const Color.fromARGB(255, 248, 132, 254),
+          accentColor: const Color(0xFFE12D2D),
+          buttonTheme: const LoginButtonTheme(
+            backgroundColor: Color(0xFFE12D2D),
+            splashColor: Color.fromARGB(255, 255, 142, 142),
+          ),
+        ),
+        //title: 'ECORP',
+        //logo: AssetImage('assets/images/ecorp-lightblue.png'),
+        onLogin: _authUser,
+        onSignup: _signupUser,
+
+        onSubmitAnimationCompleted: () {
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ));
+        },
+        onRecoverPassword: _recoverPassword,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(
+              top: (MediaQuery.of(context).size.height * 0.8),
+            ),
+            child: ElevatedButton.icon(
+              onPressed: () => HomePage(),
+              icon: const Image(
+                image: AssetImage('assets/images/google.png'),
+                height: 24.0,
+              ),
+              label: const Text(
+                'Google',
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.black,
+                backgroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24.0),
+                ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                  vertical: 8.0,
+                ),
+                elevation: 10,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
