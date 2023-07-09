@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 import '../pages/editPreferenceDetails.dart';
 
@@ -19,6 +20,7 @@ class HomeCard extends StatefulWidget {
 }
 
 class _HomeCardState extends State<HomeCard> {
+  NumberFormat formatter = NumberFormat.decimalPattern('en-IN');
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -135,6 +137,11 @@ class _HomeCardState extends State<HomeCard> {
           //____ Expansion Card ______//
           //
           return ExpansionTileCard(
+            shadowColor: Colors.black,
+            initialPadding: const EdgeInsets.symmetric(vertical: 8),
+            finalPadding: EdgeInsets.zero,
+            initialElevation: 8,
+            elevation: 8,
             leading: Icon(icons[itemSnapShot.data!.index]),
             title: Text(itemSnapShot.data!.title),
             subtitle: Column(
@@ -176,7 +183,7 @@ class _HomeCardState extends State<HomeCard> {
                               : ' ',
                     ),
                     Text(
-                      '${itemSnapShot.data!.amountSaved}/${itemSnapShot.data!.goalAmount}',
+                      '₹${formatter.format(itemSnapShot.data!.amountSaved)} / ₹${formatter.format(itemSnapShot.data!.goalAmount)}',
                     )
                   ],
                 ),

@@ -1,5 +1,7 @@
 import 'package:dream_tracker/backend.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 import '../colors.dart';
 
@@ -18,6 +20,7 @@ class _PreferenceDetailsState extends State<PreferenceDetails> {
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _goalAmtController = TextEditingController();
+  NumberFormat _formatter = NumberFormat.decimalPattern('en-IN');
 
   @override
   void dispose() {
@@ -94,6 +97,23 @@ class _PreferenceDetailsState extends State<PreferenceDetails> {
                       ),
                       TextFormField(
                         keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
+                          TextInputFormatter.withFunction((oldValue, newValue) {
+                            final int? parsed = int.tryParse(newValue.text);
+                            if (parsed != null) {
+                              final String formatted =
+                                  _formatter.format(parsed);
+                              return TextEditingValue(
+                                text: formatted,
+                                selection: TextSelection.collapsed(
+                                    offset: formatted.length),
+                              );
+                            } else {
+                              return oldValue;
+                            }
+                          }),
+                        ],
                         controller: _goalAmtController,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
@@ -131,6 +151,8 @@ class _PreferenceDetailsState extends State<PreferenceDetails> {
                                 shape: const StadiumBorder(),
                                 fixedSize: const Size(100, 50)),
                             onPressed: () {
+                              _goalAmtController.text =
+                                  _goalAmtController.text.replaceAll(",", "");
                               if (_formKey.currentState!.validate()) {
                                 addGoals(
                                     _nameController.text,

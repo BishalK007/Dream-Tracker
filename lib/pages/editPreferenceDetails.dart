@@ -1,5 +1,7 @@
 //import 'package:auth_testing/backend/database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import '../backend.dart';
 import '../colors.dart';
 
@@ -29,6 +31,7 @@ class _EditPrederenceState extends State<EditPrederence> {
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _savedAmtController = TextEditingController();
   final TextEditingController _goalAmtController = TextEditingController();
+  NumberFormat _formatter = NumberFormat.decimalPattern('en-IN');
 
   @override
   void initState() {
@@ -36,8 +39,8 @@ class _EditPrederenceState extends State<EditPrederence> {
     _goalIdController.text = widget.goalId;
     _preferenceController.text = widget.preference;
     _descriptionController.text = widget.description;
-    _savedAmtController.text = widget.savedAmt.toString();
-    _goalAmtController.text = widget.goalAmt.toString();
+    _savedAmtController.text = _formatter.format(widget.savedAmt).toString();
+    _goalAmtController.text = _formatter.format(widget.goalAmt).toString();
   }
 
   @override
@@ -124,6 +127,26 @@ class _EditPrederenceState extends State<EditPrederence> {
                             fit: FlexFit.loose,
                             child: TextFormField(
                               keyboardType: TextInputType.number,
+                              inputFormatters: <TextInputFormatter>[
+                                FilteringTextInputFormatter.allow(
+                                    RegExp(r'[0-9.]')),
+                                TextInputFormatter.withFunction(
+                                    (oldValue, newValue) {
+                                  final int? parsed =
+                                      int.tryParse(newValue.text);
+                                  if (parsed != null) {
+                                    final String formatted =
+                                        _formatter.format(parsed);
+                                    return TextEditingValue(
+                                      text: formatted,
+                                      selection: TextSelection.collapsed(
+                                          offset: formatted.length),
+                                    );
+                                  } else {
+                                    return oldValue;
+                                  }
+                                }),
+                              ],
                               style: const TextStyle(color: Colors.black),
                               controller: _goalAmtController,
                               decoration: const InputDecoration(
@@ -165,6 +188,8 @@ class _EditPrederenceState extends State<EditPrederence> {
                               shape: const StadiumBorder(), // Background color
                             ),
                             onPressed: () {
+                              _goalAmtController.text =
+                                  _goalAmtController.text.replaceAll(",", "");
                               if (_formKey.currentState!.validate()) {
                                 updateDetails(
                                   _descriptionController.text,
