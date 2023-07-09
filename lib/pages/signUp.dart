@@ -1,25 +1,33 @@
 import 'package:dream_tracker/pages/home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 //import 'dashboard_screen.dart';
 
-const users = const {
-  'dribbble@gmail.com': '12345',
-  'hunter@gmail.com': 'hunter',
-};
+// const users = const {
+//   'dribbble@gmail.com': '12345',
+//   'hunter@gmail.com': 'hunter',
+// };
 
 class LoginScreen extends StatelessWidget {
-  Duration get loginTime => Duration(milliseconds: 1000);
+  Duration get loginTime => const Duration(milliseconds: 1000);
 
   Future<String?> _authUser(LoginData data) {
     debugPrint('Name: ${data.name}, Password: ${data.password}');
-    return Future.delayed(loginTime).then((_) {
-      if (!users.containsKey(data.name)) {
-        return 'User not exists';
-      }
-      if (users[data.name] != data.password) {
-        return 'Password does not match';
+    return Future.delayed(loginTime).then((_) async {
+      try {
+        final credential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: data.name,
+          password: data.password,
+        );
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'user-not-found') {
+          return ('No user found for that email.');
+        } else if (e.code == 'wrong-password') {
+          return ('Wrong password provided for that user.');
+        }
       }
       return null;
     });
@@ -35,9 +43,9 @@ class LoginScreen extends StatelessWidget {
   Future<String> _recoverPassword(String name) {
     debugPrint('Name: $name');
     return Future.delayed(loginTime).then((_) {
-      if (!users.containsKey(name)) {
-        return 'User not exists';
-      }
+      // if (!users.containsKey(name)) {
+      //   return 'User not exists';
+      // }
       return "null";
     });
   }
@@ -63,7 +71,7 @@ class LoginScreen extends StatelessWidget {
       ],
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => HomePage(),
+          builder: (context) => const HomePage(),
         ));
       },
       onRecoverPassword: _recoverPassword,

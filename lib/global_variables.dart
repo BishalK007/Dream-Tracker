@@ -22,3 +22,18 @@ List<IconData> icons = [
   FontAwesomeIcons.planeDeparture,
   FontAwesomeIcons.bagShopping,
 ];
+
+class GoalData {
+  final String id;
+  final String title;
+  final String notes;
+  final int amountSaved;
+  final int goalAmount;
+  GoalData({
+    required this.amountSaved,
+    required this.goalAmount,
+    required this.id,
+    required this.notes,
+    required this.title,
+  });
+}
