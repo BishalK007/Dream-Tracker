@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import '../colors.dart';
 
 class PreferenceDetails extends StatefulWidget {
+  final int id;
   final String preference;
-  const PreferenceDetails({super.key, required this.preference});
+  const PreferenceDetails(
+      {super.key, required this.preference, required this.id});
 
   @override
   State<PreferenceDetails> createState() => _PreferenceDetailsState();
@@ -27,7 +29,7 @@ class _PreferenceDetailsState extends State<PreferenceDetails> {
   @override
   void initState() {
     super.initState();
-    _nameController.text = widget.preference;
+    _nameController.text = (widget.id < 7) ? widget.preference : "";
   }
 
   @override
@@ -52,7 +54,7 @@ class _PreferenceDetailsState extends State<PreferenceDetails> {
                     fontWeight: FontWeight.bold),
               ),
               const SizedBox(
-                height: 10,
+                height: 40,
               ),
               Form(
                   key: _formKey,
@@ -60,6 +62,7 @@ class _PreferenceDetailsState extends State<PreferenceDetails> {
                     children: [
                       TextFormField(
                         autofocus: true,
+                        enabled: (widget.id < 7) ? false : true,
                         controller: _nameController,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
@@ -104,6 +107,35 @@ class _PreferenceDetailsState extends State<PreferenceDetails> {
                           }
                           return null;
                         },
+                      ),
+                      const SizedBox(height: 40),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: myPrimarySwatch,
+                                foregroundColor: Colors.white,
+                                shape: const StadiumBorder(),
+                                fixedSize: const Size(100, 50)),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text("Back"),
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: myPrimarySwatch,
+                                foregroundColor: Colors.white,
+                                shape: const StadiumBorder(),
+                                fixedSize: const Size(100, 50)),
+                            onPressed: () {
+                              //todo submit
+                              if (_formKey.currentState!.validate()) {}
+                            },
+                            child: const Text("Submit"),
+                          )
+                        ],
                       )
                     ],
                   ))

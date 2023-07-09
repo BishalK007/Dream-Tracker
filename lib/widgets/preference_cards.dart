@@ -27,7 +27,10 @@ class _PreferenceCardsState extends State<PreferenceCards> {
             context: context,
             builder: (context) => FractionallySizedBox(
               heightFactor: 0.8,
-              child: PreferenceDetails(preference: widget.name),
+              child: PreferenceDetails(
+                preference: widget.name,
+                id: widget.id,
+              ),
             ),
           );
         },
