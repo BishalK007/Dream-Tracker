@@ -251,6 +251,7 @@ class _HomeCardState extends State<HomeCard> {
                                                 Navigator.pop(context);
                                               } else {
                                                 deleteGoal(widget.id);
+                                                Navigator.pop(context);
                                               }
                                             },
                                             child: (index == 0)
@@ -289,7 +290,7 @@ class _HomeCardState extends State<HomeCard> {
                             width: 40.0,
                             height: 40.0,
                             decoration: BoxDecoration(
-                              color: const Color(0xFFF7F1FB),
+                              color: myPrimarySwatch,
                               shape: BoxShape.circle,
                               boxShadow: [
                                 BoxShadow(
@@ -307,7 +308,7 @@ class _HomeCardState extends State<HomeCard> {
                                     : (index == 1)
                                         ? Icons.delete
                                         : Icons.edit,
-                                color: const Color(0xFF8e6ccd),
+                                color: Colors.white,
                                 size: 30.0,
                               ),
                             ),
