@@ -1,4 +1,5 @@
 import 'package:dream_tracker/backend.dart';
+import 'package:dream_tracker/colors.dart';
 import 'package:dream_tracker/global_variables.dart';
 import 'package:dream_tracker/widgets/ad_place.dart';
 import 'package:flutter/material.dart';
@@ -105,7 +106,7 @@ class _HomeCardState extends State<HomeCard> {
                               ),
                             ],
                           ),
-                          child: Center(
+                          child: const Center(
                             child: Icon(
                               Icons.share,
                               color: Colors.white,
@@ -198,36 +199,43 @@ class _HomeCardState extends State<HomeCard> {
                   //
                   Row(
                     mainAxisSize: MainAxisSize.min,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          // Handle button tap
-                        },
-                        child: Container(
-                          width: 50.0,
-                          height: 50.0,
-                          decoration: BoxDecoration(
-                            color: Color(0xFFebddff),
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 7,
-                                offset: Offset(0, 3),
+                    children: List.generate(3, (index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 7),
+                        child: InkWell(
+                          onTap: () {
+                            // Handle button tap
+                          },
+                          child: Container(
+                            width: 40.0,
+                            height: 40.0,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF7F1FB),
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 7,
+                                  offset: Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: Center(
+                              child: Icon(
+                                (index == 0)
+                                    ? Icons.share
+                                    : (index == 1)
+                                        ? Icons.delete
+                                        : Icons.edit,
+                                color: const Color(0xFF8e6ccd),
+                                size: 30.0,
                               ),
-                            ],
-                          ),
-                          child: Center(
-                            child: Icon(
-                              Icons.share,
-                              color: Colors.white,
-                              size: 30.0,
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      );
+                    }),
                   ),
                 ],
               ),
