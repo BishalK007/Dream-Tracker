@@ -5,6 +5,7 @@ import 'package:dream_tracker/widgets/ad_place.dart';
 import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:expandable_text/expandable_text.dart';
+import 'package:flutter/services.dart';
 
 import '../pages/editPreferenceDetails.dart';
 
@@ -207,83 +208,82 @@ class _HomeCardState extends State<HomeCard> {
                         child: InkWell(
                           onTap: () {
                             // Handle button tap
-                            if (index == 1) {
+                            if (index == 0) {
                               showModalBottomSheet(
-                                isScrollControlled: true,
-                                context: context,
-                                builder: (context) =>
-                                    //    FractionallySizedBox(
-                                    // heightFactor: 0.8,
-                                    // child:
-                                    Container(
-                                  height: 180,
-                                  // color: Colors.amber,
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            0, 20, 0, 70),
-                                        child: Center(
-                                          child: Text(
-                                            "Want to delete this Goal?",
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                              color: myPrimarySwatch,
-                                            ),
+                                  isScrollControlled: true,
+                                  context: context,
+                                  builder: (context) => FractionallySizedBox(
+                                      heightFactor: 0.15,
+                                      child: Column(
+                                        children: [
+                                          const SizedBox(
+                                            height: 10,
                                           ),
-                                        ),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: List.generate(2, (index) {
-                                          return ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                              fixedSize: const Size(100, 50),
-                                              //backgroundColor: Colors.black,
-                                              shape:
-                                                  const StadiumBorder(), // Background color
-                                            ),
-                                            onPressed: () {
-                                              if (index == 0) {
-                                                Navigator.pop(context);
-                                              } else {
-                                                deleteGoal(widget.id);
-                                                Navigator.pop(context);
-                                              }
-                                            },
-                                            child: (index == 0)
-                                                ? const Text('Cancel')
-                                                : const Text('Delete'),
-                                          );
-                                        }),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                // ),
-                              );
-                            }
-
-                            if (index == 2) {
+                                          Text(
+                                            "Share your goal",
+                                            style: TextStyle(
+                                                color: myPrimarySwatch,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: Center(
+                                                  child: Text(
+                                                    widget.id,
+                                                    style: const TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 12.5),
+                                                child: IconButton(
+                                                  icon: const Icon(Icons.copy),
+                                                  onPressed: () {
+                                                    Clipboard.setData(
+                                                        ClipboardData(
+                                                            text: widget.id));
+                                                    Navigator.pop(context);
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                            const SnackBar(
+                                                      content: Center(
+                                                        child: Text(
+                                                            'Text copied to clipboard'),
+                                                      ),
+                                                    ));
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      )));
+                            } else if (index == 2) {
                               showModalBottomSheet(
-                                isScrollControlled: true,
-                                context: context,
-                                builder: (context) =>
-                                    const FractionallySizedBox(
-                                  heightFactor: 0.8,
-                                  child: EditPrederence(
-                                    description: 'abcd',
-                                    goalAmt: 0,
-                                    goalId: 'o',
-                                    preference: 'aa',
-                                    savedAmt: 10,
-                                    //key: ,
-                                  ),
-                                ),
-                              );
+                                  isScrollControlled: true,
+                                  context: context,
+                                  builder: (context) =>
+                                      const FractionallySizedBox(
+                                        heightFactor: 0.8,
+                                        child: EditPrederence(
+                                          description: 'abcd',
+                                          goalAmt: 0,
+                                          goalId: 'o',
+                                          preference: 'aa',
+                                          savedAmt: 10,
+                                          //key: ,
+                                        ),
+                                      ));
                             }
                           },
                           child: Container(
