@@ -1,4 +1,5 @@
 import 'package:dream_tracker/colors.dart';
+import 'package:dream_tracker/pages/editPreferenceDetails.dart';
 import 'package:dream_tracker/pages/preference_selection_page.dart';
 import 'package:dream_tracker/pages/signUp.dart';
 import 'package:dream_tracker/widgets/home_body.dart';
@@ -114,14 +115,28 @@ class _HomePageState extends State<HomePage> {
           children: [
             FloatingActionButton(
               onPressed: () {
+                // showModalBottomSheet(
+                //   isScrollControlled: true,
+                //   context: context,
+                //   builder: (context) => const FractionallySizedBox(
+                //     heightFactor: 0.8,
+                //     child: SelectPreference(),
+                //   ),
+                // );
                 showModalBottomSheet(
-                  isScrollControlled: true,
-                  context: context,
-                  builder: (context) => const FractionallySizedBox(
-                    heightFactor: 0.8,
-                    child: SelectPreference(),
-                  ),
-                );
+                    isScrollControlled: true,
+                    context: context,
+                    builder: (context) => FractionallySizedBox(
+                          heightFactor: 0.8,
+                          child: EditPrederence(
+                            description: 'abcd',
+                            goalAmt: 0,
+                            goalId: 'o',
+                            preference: 'aa',
+                            savedAmt: 10,
+                            //key: ,
+                          ),
+                        ));
               },
               child: const Icon(Icons.add),
             ),
