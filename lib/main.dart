@@ -1,5 +1,6 @@
 import 'package:dream_tracker/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:dream_tracker/home.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Text('Hello World'),
+      home: const HomePage(),
     );
   }
 }
