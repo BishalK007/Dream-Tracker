@@ -1,5 +1,4 @@
 import 'package:dream_tracker/colors.dart';
-import 'package:dream_tracker/pages/editPreferenceDetails.dart';
 import 'package:dream_tracker/pages/preference_selection_page.dart';
 import 'package:dream_tracker/pages/signUp.dart';
 import 'package:dream_tracker/widgets/home_body.dart';
@@ -31,7 +30,7 @@ class _HomePageState extends State<HomePage> {
             //____APP BAR
             //
             SliverAppBar(
-              title: const Text('Dream Tracker'),
+              title: const Text('Dashboard'),
               backgroundColor: Theme.of(context).primaryColor,
               actions: [
                 PopupMenuButton<int>(
@@ -39,14 +38,14 @@ class _HomePageState extends State<HomePage> {
                   icon: const Icon(Icons.menu),
                   itemBuilder: (context) => [
                     PopupMenuItem(
-                      child: const Row(
+                      child: Row(
                         children: [
                           Icon(
                             Icons.logout_rounded,
-                            color: Colors.deepOrange,
+                            color: myPrimarySwatch,
                           ),
-                          SizedBox(width: 25),
-                          Text(
+                          const SizedBox(width: 25),
+                          const Text(
                             "Log Out",
                             style: TextStyle(fontWeight: FontWeight.w400),
                           ),
@@ -66,14 +65,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                     // popupmenu item 2
                     PopupMenuItem(
-                      child: const Row(
+                      child: Row(
                         children: [
-                          Icon(
-                            Icons.delete_rounded,
-                            color: Colors.red,
-                          ),
-                          SizedBox(width: 25),
-                          Text(
+                          Icon(Icons.delete_rounded, color: myPrimarySwatch),
+                          const SizedBox(width: 25),
+                          const Text(
                             "Delete User",
                             style: TextStyle(fontWeight: FontWeight.w400),
                           )
@@ -114,6 +110,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             FloatingActionButton(
+              tooltip: "Add Goal",
               onPressed: () {
                 showModalBottomSheet(
                   isScrollControlled: true,
@@ -123,7 +120,6 @@ class _HomePageState extends State<HomePage> {
                     child: SelectPreference(),
                   ),
                 );
-                
               },
               child: const Icon(Icons.add),
             ),

@@ -1,6 +1,5 @@
 import 'package:dream_tracker/pages/preference_details_page.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PreferenceCards extends StatefulWidget {
   final int id;

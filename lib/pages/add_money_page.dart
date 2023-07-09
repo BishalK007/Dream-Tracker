@@ -1,5 +1,7 @@
-//import 'package:auth_testing/backend/database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
+import '../backend.dart';
 import '../colors.dart';
 
 class AddMoney extends StatefulWidget {
@@ -28,6 +30,7 @@ class _AddMoneyState extends State<AddMoney> {
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _addMoneyController = TextEditingController();
   final TextEditingController _goalAmtController = TextEditingController();
+  NumberFormat _formatter = NumberFormat.decimalPattern('en-IN');
 
   @override
   void initState() {
@@ -35,8 +38,7 @@ class _AddMoneyState extends State<AddMoney> {
     _goalIdController.text = widget.goalId;
     _preferenceController.text = widget.preference;
     _descriptionController.text = widget.description;
-    _addMoneyController.text = widget.savedAmt.toString();
-    _goalAmtController.text = widget.goalAmt.toString();
+    _goalAmtController.text = _formatter.format(widget.goalAmt).toString();
   }
 
   @override
@@ -109,6 +111,26 @@ class _AddMoneyState extends State<AddMoney> {
                             child: TextFormField(
                               autofocus: true,
                               keyboardType: TextInputType.number,
+                              inputFormatters: <TextInputFormatter>[
+                                FilteringTextInputFormatter.allow(
+                                    RegExp(r'[0-9.]')),
+                                TextInputFormatter.withFunction(
+                                    (oldValue, newValue) {
+                                  final int? parsed =
+                                      int.tryParse(newValue.text);
+                                  if (parsed != null) {
+                                    final String formatted =
+                                        _formatter.format(parsed);
+                                    return TextEditingValue(
+                                      text: formatted,
+                                      selection: TextSelection.collapsed(
+                                          offset: formatted.length),
+                                    );
+                                  } else {
+                                    return oldValue;
+                                  }
+                                }),
+                              ],
                               controller: _addMoneyController,
                               decoration: const InputDecoration(
                                 labelText: 'Add Money',
@@ -166,12 +188,18 @@ class _AddMoneyState extends State<AddMoney> {
                               shape: const StadiumBorder(), // Background color
                             ),
                             onPressed: () {
+                              _addMoneyController.text =
+                                  _addMoneyController.text.replaceAll(",", "");
                               if (_formKey.currentState!.validate()) {
                                 //todo add money submit
+                                addMoney(
+                                    widget.savedAmt +
+                                        int.parse(_addMoneyController.text),
+                                    widget.goalId);
                                 Navigator.pop(context);
                               }
                             },
-                            child: const Text('Submit'),
+                            child: const Text('Add'),
                           ),
                         ],
                       ),

@@ -24,16 +24,32 @@ List<IconData> icons = [
 ];
 
 class GoalData {
+  final int index;
   final String id;
   final String title;
   final String notes;
   final int amountSaved;
   final int goalAmount;
-  GoalData({
-    required this.amountSaved,
-    required this.goalAmount,
-    required this.id,
-    required this.notes,
+  GoalData(
+      {required this.amountSaved,
+      required this.goalAmount,
+      required this.id,
+      required this.notes,
+      required this.title,
+      required this.index});
+}
+
+class AdPlaceItem {
+  final String title;
+  final String description;
+  final int price;
+  final String imgLink;
+  final String productLink;
+  AdPlaceItem({
     required this.title,
+    required this.description,
+    required this.imgLink,
+    required this.price,
+    required this.productLink,
   });
 }

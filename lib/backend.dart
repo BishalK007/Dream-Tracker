@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dream_tracker/global_variables.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+
+import 'colors.dart';
 
 Stream<List<String>> getGoalListStream() {
   final uid = FirebaseAuth.instance.currentUser?.uid;
@@ -34,12 +37,14 @@ Stream<GoalData> getGoalItemStream(String id) {
         id: id,
         notes: 'notes...',
         title: "title....",
+        index: 0,
       );
     }
     return GoalData(
       amountSaved: snapShot.data()!['amountSaved'],
       goalAmount: snapShot.data()!['goalAmount'],
       id: id,
+      index: snapShot.data()!['id'],
       notes: snapShot.data()!['notes'],
       title: snapShot.data()!['title'],
     );
@@ -112,23 +117,74 @@ Future<void> addGoals(
   }
 }
 
-Future<Map<String, dynamic>?> addExistingGoal(String id) async {
-  Map<String, dynamic>? data;
-  try {
-    DocumentSnapshot<Object?> existingGoal = await goals.doc(id).get();
-    print(existingGoal);
-    data = existingGoal.data() as Map<String, dynamic>?;
-    // Access the data from the document
-    if (data != null) {
-      return data;
+Future<void> addExistingGoal(String id, BuildContext context) async {
+  final QuerySnapshot snapshot =
+      await FirebaseFirestore.instance.collection('allGoals').get();
+  final goalExists = snapshot.docs.map((doc) => doc.id).toList().contains(id);
+  //
+  //__ If id Does not exists globally_________//
+  //
+  if (!goalExists) {
+    // ignore: use_build_context_synchronously
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      padding: EdgeInsets.zero,
+      content: Container(
+        color: Colors.red.shade900,
+        height: 50,
+        child: const Center(
+          child: Text(
+            "Invalid Id",
+            style: TextStyle(
+                color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+    ));
+  } else {
+    //
+    //______ Check if goal Exists for curr user
+    //
+    bool goalExistsCurrUser = false;
+
+    final User? user = FirebaseAuth.instance.currentUser;
+    final DocumentSnapshot<Map<String, dynamic>> snapshot =
+        await FirebaseFirestore.instance
+            .collection('allUsers')
+            .doc(user!.uid)
+            .get();
+    final List<dynamic> goals = snapshot.data()?['goals'] ?? [];
+    goalExistsCurrUser = goals.contains(id);
+
+    if (goalExistsCurrUser) {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        padding: EdgeInsets.zero,
+        content: Container(
+          color: Colors.green.shade900,
+          height: 50,
+          child: const Center(
+            child: Text(
+              "Already in Your Goals",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+      ));
     } else {
-      print(data);
-      return data;
+      // Update the 'goals' list field in the document
+      FirebaseFirestore.instance
+          .collection('allUsers')
+          .doc(FirebaseAuth.instance.currentUser?.uid)
+          .update({
+            'goals': FieldValue.arrayUnion([id])
+          })
+          .then((value) => print('Goal added successfully!'))
+          .catchError((error) => print('Error adding goal: $error'));
     }
-  } catch (error) {
-    print("Error during fetching the existing goal: $error");
   }
-  return data;
 }
 
 void addExistingGoalToAnotherUser(String goalId) {
@@ -146,6 +202,28 @@ void addExistingGoalToAnotherUser(String goalId) {
   }
 }
 
+Future<void> updateDetails(
+    String description, int goalAmt, String goalId) async {
+  try {
+    goals.doc(goalId).update({
+      'notes': description,
+      'goalAmount': goalAmt,
+    });
+  } catch (e) {
+    print('Error occured during $e');
+  }
+}
+
+Future<void> addMoney(int totalSaved, String goalId) async {
+  try {
+    goals.doc(goalId).update({
+      'amountSaved': totalSaved,
+    });
+  } catch (e) {
+    print('Error occured during $e');
+  }
+}
+
 void deleteGoal(String goalItem) async {
   final currentUserUid = FirebaseAuth.instance.currentUser!.uid;
   final allUsersRef =
@@ -153,6 +231,29 @@ void deleteGoal(String goalItem) async {
   await allUsersRef.update({
     'goals': FieldValue.arrayRemove([goalItem])
   });
+}
+
+Future<List<AdPlaceItem>> fetchAdPlaceItems(String goal, int goalPrice) async {
+  QuerySnapshot snapshot = await FirebaseFirestore.instance
+      .collection(goal)
+      .where("Price", isLessThanOrEqualTo: goalPrice)
+      .orderBy("Price")
+      .get();
+  // print(snapshot);
+  List<AdPlaceItem> adPlaceItems = snapshot.docs.map((doc) {
+    Map<String, dynamic> data = (doc.data() as Map<String, dynamic>);
+    print("hi");
+    print(data['Product Url']);
+    return AdPlaceItem(
+      title: data['Title'],
+      description: data['Description'],
+      price: data['Price'],
+      imgLink: data['Image Link'],
+      productLink: data['Product Url'],
+    );
+  }).toList();
+  // print("hii $adPlaceItems");
+  return Future.value(adPlaceItems);
 }
 
 

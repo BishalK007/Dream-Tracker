@@ -45,6 +45,8 @@ dependencies:
   introduction_slider: ^2.0.1
   google_sign_in: ^6.1.4
   cloud_firestore: ^4.8.2
+  intl: ^0.18.1
+  flutter_carousel_slider: ^1.1.0
 
 dev_dependencies:
   flutter_test:
