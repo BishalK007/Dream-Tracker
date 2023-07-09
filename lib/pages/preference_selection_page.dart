@@ -3,6 +3,8 @@ import 'package:dream_tracker/global_variables.dart';
 import 'package:dream_tracker/widgets/preference_cards.dart';
 import 'package:flutter/material.dart';
 
+import '../backend.dart';
+
 class SelectPreference extends StatefulWidget {
   const SelectPreference({super.key});
 
@@ -53,6 +55,7 @@ class _SelectPreferenceState extends State<SelectPreference> {
                       child: InkWell(
                           onTap: () {
                             // todo sync
+                            addExistingGoal(_syncController.text);
                             print("sync presses");
                           },
                           child: const Icon(Icons.add)),
