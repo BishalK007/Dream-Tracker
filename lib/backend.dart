@@ -2,50 +2,48 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dream_tracker/global_variables.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-Stream<List<GoalData>> getGoalListStream() async* {
-  List<GoalData> goals = [
-    GoalData(
-        id: "1",
-        title: "Save up for a new car",
-        notes: "I need a reliable car for work",
-        amountSaved: 5000,
-        goalAmount: 20000),
-    GoalData(
-        id: "2",
-        title: "Take a trip to Hawaii",
-        notes: "I've always wanted to see the beaches",
-        amountSaved: 0,
-        goalAmount: 10000),
-    GoalData(
-        id: "3",
-        title: "Pay off credit card debt",
-        notes: "I want to improve my credit score",
-        amountSaved: 1000,
-        goalAmount: 5000),
-  ];
-
-  // while (true) {
-  // await Future.delayed(
-  //   const Duration(seconds: 5),
-  // );
-  yield goals;
+Stream<List<String>> getGoalListStream() {
+  final uid = FirebaseAuth.instance.currentUser?.uid;
+  // if (uid == null) {
+  //   return const Stream.empty();
   // }
+  return FirebaseFirestore.instance
+      .collection('allUsers')
+      .doc(uid)
+      .snapshots()
+      .map((snapShot) {
+    final userData = snapShot.data();
+    // if (userData == null) {
+    //   return [];
+    // }
+    final goals = List<String>.from(userData!['goals'] ?? []);
+    return goals;
+  });
 }
 
-Stream<GoalData> getGoalItemStream() async* {
-  GoalData goal = GoalData(
-    id: "1",
-    title: "Save up for a new car",
-    notes:
-        "I need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for work",
-    amountSaved: 21000,
-    goalAmount: 20000,
-  );
-
-  // while (true) {
-  // await Future.delayed(const Duration(seconds: 5));
-  yield goal;
-  // }
+Stream<GoalData> getGoalItemStream(String id) {
+  return FirebaseFirestore.instance
+      .collection('allGoals')
+      .doc(id)
+      .snapshots()
+      .map((snapShot) {
+    if (snapShot.data() == null) {
+      return GoalData(
+        amountSaved: 50,
+        goalAmount: 100,
+        id: id,
+        notes: 'notes...',
+        title: "title....",
+      );
+    }
+    return GoalData(
+      amountSaved: snapShot.data()!['amountSaved'],
+      goalAmount: snapShot.data()!['goalAmount'],
+      id: id,
+      notes: snapShot.data()!['notes'],
+      title: snapShot.data()!['title'],
+    );
+  });
 }
 
 // Create a CollectionReference called users that references the firestore collection
