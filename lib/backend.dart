@@ -145,3 +145,12 @@ void addExistingGoalToAnotherUser(String goalId) {
     print('Error during adding existing goal to antoher user: $e');
   }
 }
+
+void deleteGoal(String goalItem) async {
+  final currentUserUid = FirebaseAuth.instance.currentUser!.uid;
+  final allUsersRef =
+      FirebaseFirestore.instance.collection('allUsers').doc(currentUserUid);
+  await allUsersRef.update({
+    'goals': FieldValue.arrayRemove([goalItem])
+  });
+}
