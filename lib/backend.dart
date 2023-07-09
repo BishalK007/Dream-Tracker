@@ -154,3 +154,5 @@ void deleteGoal(String goalItem) async {
     'goals': FieldValue.arrayRemove([goalItem])
   });
 }
+
+
