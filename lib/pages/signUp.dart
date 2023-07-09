@@ -10,7 +10,7 @@ const users = const {
 };
 
 class LoginScreen extends StatelessWidget {
-  Duration get loginTime => Duration(milliseconds: 2250);
+  Duration get loginTime => Duration(milliseconds: 1000);
 
   Future<String?> _authUser(LoginData data) {
     debugPrint('Name: ${data.name}, Password: ${data.password}');
@@ -45,8 +45,8 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlutterLogin(
-      title: 'ECORP',
-      logo: AssetImage('assets/images/ecorp-lightblue.png'),
+      //title: 'ECORP',
+      //logo: AssetImage('assets/images/ecorp-lightblue.png'),
       onLogin: _authUser,
       onSignup: _signupUser,
       loginProviders: <LoginProvider>[
@@ -57,34 +57,6 @@ class LoginScreen extends StatelessWidget {
             debugPrint('start google sign in');
             await Future.delayed(loginTime);
             debugPrint('stop google sign in');
-            return null;
-          },
-        ),
-        LoginProvider(
-          icon: FontAwesomeIcons.facebookF,
-          label: 'Facebook',
-          callback: () async {
-            debugPrint('start facebook sign in');
-            await Future.delayed(loginTime);
-            debugPrint('stop facebook sign in');
-            return null;
-          },
-        ),
-        LoginProvider(
-          icon: FontAwesomeIcons.linkedinIn,
-          callback: () async {
-            debugPrint('start linkdin sign in');
-            await Future.delayed(loginTime);
-            debugPrint('stop linkdin sign in');
-            return null;
-          },
-        ),
-        LoginProvider(
-          icon: FontAwesomeIcons.githubAlt,
-          callback: () async {
-            debugPrint('start github sign in');
-            await Future.delayed(loginTime);
-            debugPrint('stop github sign in');
             return null;
           },
         ),

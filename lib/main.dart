@@ -1,5 +1,6 @@
 import 'package:dream_tracker/firebase_options.dart';
 import 'package:dream_tracker/pages/signUp.dart';
+import 'package:dream_tracker/pages/signUp.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:dream_tracker/pages/home.dart';
 import 'package:flutter/material.dart';
