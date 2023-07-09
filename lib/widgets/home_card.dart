@@ -272,16 +272,16 @@ class _HomeCardState extends State<HomeCard> {
                               showModalBottomSheet(
                                   isScrollControlled: true,
                                   context: context,
-                                  builder: (context) =>
-                                      const FractionallySizedBox(
+                                  builder: (context) => FractionallySizedBox(
                                         heightFactor: 0.8,
                                         child: EditPrederence(
-                                          description: 'abcd',
-                                          goalAmt: 0,
-                                          goalId: 'o',
-                                          preference: 'aa',
-                                          savedAmt: 10,
-                                          //key: ,
+                                          description: itemSnapShot.data!.notes,
+                                          goalAmt:
+                                              itemSnapShot.data!.goalAmount,
+                                          goalId: itemSnapShot.data!.id,
+                                          preference: itemSnapShot.data!.title,
+                                          savedAmt:
+                                              itemSnapShot.data!.amountSaved,
                                         ),
                                       ));
                             }
