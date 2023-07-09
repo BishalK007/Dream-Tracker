@@ -41,6 +41,8 @@ dependencies:
   flutter_login: ^4.1.1
   expansion_tile_card: ^3.0.0
   firebase_auth: ^4.6.3
+  expandable_text: ^2.3.0
+
 
 dev_dependencies:
   flutter_test:

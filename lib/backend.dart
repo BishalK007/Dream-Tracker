@@ -22,23 +22,26 @@ Stream<List<GoalData>> getGoalListStream() async* {
         goalAmount: 5000),
   ];
 
-  while (true) {
-    yield goals;
-    await Future.delayed(Duration(seconds: 5));
-  }
+  // while (true) {
+  // await Future.delayed(
+  //   const Duration(seconds: 5),
+  // );
+  yield goals;
+  // }
 }
 
 Stream<GoalData> getGoalItemStream() async* {
   GoalData goal = GoalData(
     id: "1",
     title: "Save up for a new car",
-    notes: "I need a reliable car for work",
-    amountSaved: 5000,
+    notes:
+        "I need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for workI need a reliable car for work",
+    amountSaved: 21000,
     goalAmount: 20000,
   );
 
-  while (true) {
-    yield goal;
-    await Future.delayed(Duration(seconds: 5));
-  }
+  // while (true) {
+  // await Future.delayed(const Duration(seconds: 5));
+  yield goal;
+  // }
 }

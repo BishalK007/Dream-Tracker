@@ -29,6 +29,7 @@ class _HomeBodyState extends State<HomeBody> {
           );
         } else {
           return ListView.builder(
+            padding: const EdgeInsets.all(10),
             itemCount: listSnapShot.data!.length,
             itemBuilder: (context, index) {
               return HomeCard(
