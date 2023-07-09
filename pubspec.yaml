@@ -39,6 +39,7 @@ dependencies:
   firebase_core: ^2.14.0
   hidable: ^1.0.4
   flutter_login: ^4.1.1
+  firebase_auth: ^4.6.3
 
 dev_dependencies:
   flutter_test:
