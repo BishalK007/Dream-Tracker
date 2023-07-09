@@ -35,7 +35,6 @@ class _AddMoneyState extends State<AddMoney> {
     _goalIdController.text = widget.goalId;
     _preferenceController.text = widget.preference;
     _descriptionController.text = widget.description;
-    _addMoneyController.text = widget.savedAmt.toString();
     _goalAmtController.text = widget.goalAmt.toString();
   }
 
@@ -168,7 +167,10 @@ class _AddMoneyState extends State<AddMoney> {
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 //todo add money submit
-                                // addMoney(_descriptionController.text , );
+                                addMoney(
+                                    widget.savedAmt +
+                                        int.parse(_addMoneyController.text),
+                                    widget.goalId);
                                 Navigator.pop(context);
                               }
                             },

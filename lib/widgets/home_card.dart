@@ -40,7 +40,9 @@ class _HomeCardState extends State<HomeCard> {
                 //
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
-                  child: LinearProgressIndicator(value: 1),
+                  child: LinearProgressIndicator(
+                    value: 1,
+                  ),
                 ),
                 //
                 // ______ amount text __
@@ -148,6 +150,13 @@ class _HomeCardState extends State<HomeCard> {
                         ? 1
                         : itemSnapShot.data!.amountSaved /
                             itemSnapShot.data!.goalAmount,
+                    color: (itemSnapShot.data!.amountSaved >
+                            itemSnapShot.data!.goalAmount)
+                        ? Colors.red.shade900
+                        : (itemSnapShot.data!.amountSaved ==
+                                itemSnapShot.data!.goalAmount)
+                            ? Colors.green.shade800
+                            : myPrimarySwatch,
                   ),
                 ),
                 //
@@ -160,7 +169,10 @@ class _HomeCardState extends State<HomeCard> {
                       (itemSnapShot.data!.amountSaved >
                               itemSnapShot.data!.goalAmount)
                           ? 'Exceeded!!  '
-                          : ' ',
+                          : (itemSnapShot.data!.amountSaved ==
+                                  itemSnapShot.data!.goalAmount)
+                              ? 'Goal Reached!!  '
+                              : ' ',
                     ),
                     Text(
                       '${itemSnapShot.data!.amountSaved}/${itemSnapShot.data!.goalAmount}',
