@@ -101,7 +101,7 @@ class _PreferenceDetailsState extends State<PreferenceDetails> {
                           FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
                           TextInputFormatter.withFunction((oldValue, newValue) {
                             final int? parsed = int.tryParse(newValue.text);
-                            if (parsed != null) {
+                            try {
                               final String formatted =
                                   _formatter.format(parsed);
                               return TextEditingValue(
@@ -109,8 +109,8 @@ class _PreferenceDetailsState extends State<PreferenceDetails> {
                                 selection: TextSelection.collapsed(
                                     offset: formatted.length),
                               );
-                            } else {
-                              return oldValue;
+                            } catch (e) {
+                              return const TextEditingValue();
                             }
                           }),
                         ],
