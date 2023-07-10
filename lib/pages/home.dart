@@ -65,33 +65,33 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
                     // popupmenu item 2
-                    PopupMenuItem(
-                      child: Row(
-                        children: [
-                          Icon(Icons.delete_rounded, color: myPrimarySwatch),
-                          const SizedBox(width: 25),
-                          const Text(
-                            "Delete User",
-                            style: TextStyle(fontWeight: FontWeight.w400),
-                          )
-                        ],
-                      ),
-                      onTap: () async => {
-                        FirebaseFirestore.instance
-                            .collection('allUsers')
-                            .doc(FirebaseAuth.instance.currentUser!.uid)
-                            .delete(),
-                        await FirebaseAuth.instance.currentUser?.delete(),
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return const LoginScreen();
-                            },
-                          ),
-                        )
-                      },
-                    ),
+                    // PopupMenuItem(
+                    //   child: Row(
+                    //     children: [
+                    //       Icon(Icons.delete_rounded, color: myPrimarySwatch),
+                    //       const SizedBox(width: 25),
+                    //       const Text(
+                    //         "Delete User",
+                    //         style: TextStyle(fontWeight: FontWeight.w400),
+                    //       )
+                    //     ],
+                    //   ),
+                    //   onTap: () async => {
+                    //     Navigator.pushReplacement(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) {
+                    //           return const LoginScreen();
+                    //         },
+                    //       ),
+                    //     ),
+                    //     FirebaseFirestore.instance
+                    //         .collection('allUsers')
+                    //         .doc(FirebaseAuth.instance.currentUser!.uid)
+                    //         .delete(),
+                    //     await FirebaseAuth.instance.currentUser?.delete(),
+                    //   },
+                    // ),
                   ],
                   offset: const Offset(0, 0),
                   color: Colors.white,
