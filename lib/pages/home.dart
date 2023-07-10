@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dream_tracker/colors.dart';
 import 'package:dream_tracker/pages/preference_selection_page.dart';
 import 'package:dream_tracker/pages/signUp.dart';
@@ -76,6 +77,10 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       onTap: () async => {
+                        FirebaseFirestore.instance
+                            .collection('allUsers')
+                            .doc(FirebaseAuth.instance.currentUser!.uid)
+                            .delete(),
                         await FirebaseAuth.instance.currentUser?.delete(),
                         Navigator.pushReplacement(
                           context,
