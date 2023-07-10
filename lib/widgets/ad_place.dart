@@ -74,14 +74,14 @@ class _AdPlaceState extends State<AdPlace> {
                               // color: Colors.red,
                               child: Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: BorderRadius.circular(18),
                                   border: Border.all(
                                     color: myPrimarySwatch,
                                     width: 2,
                                   ),
                                 ),
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(23),
+                                  borderRadius: BorderRadius.circular(20),
                                   child: Image.network(
                                     snapshot.data![index]['Image Link'],
                                     fit: BoxFit.cover,
