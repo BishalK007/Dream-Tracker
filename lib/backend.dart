@@ -38,6 +38,7 @@ Stream<GoalData> getGoalItemStream(String id) {
         notes: 'notes...',
         title: "title....",
         index: 0,
+        createdBy: "dummy",
       );
     }
     return GoalData(
@@ -47,6 +48,7 @@ Stream<GoalData> getGoalItemStream(String id) {
       index: snapShot.data()!['id'],
       notes: snapShot.data()!['notes'],
       title: snapShot.data()!['title'],
+      createdBy: snapShot.data()!['createdBy'],
     );
   });
 }
@@ -104,6 +106,7 @@ Future<void> addGoals(
       'notes': description,
       'goalAmount': goalAmount,
       'amountSaved': 0,
+      'createdBy': FirebaseAuth.instance.currentUser!.email,
     });
     final goalId =
         newGoalRef.id; // this is the currently created document reference id
@@ -254,4 +257,30 @@ Future<List<dynamic>?> fetchSuggestions(String preference) async {
           .get();
   final List<dynamic>? tips = snapshot.data()?['tips'];
   return tips;
+}
+
+Future<bool> isShared(String goalId) async {
+  String createdBy = "";
+
+  try {
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection('allGoals')
+        .doc(goalId)
+        .get();
+
+    if (snapshot.exists) {
+      Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+      createdBy = data['createdBy'];
+      print('Created by: $createdBy');
+    } else {
+      print('Document does not exist');
+    }
+  } catch (error) {
+    print('Error retrieving document: $error');
+  }
+
+  print(createdBy);
+  print(FirebaseAuth.instance.currentUser!.email);
+  
+  return createdBy != FirebaseAuth.instance.currentUser!.email;
 }

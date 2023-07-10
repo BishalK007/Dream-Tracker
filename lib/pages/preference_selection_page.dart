@@ -55,6 +55,7 @@ class _SelectPreferenceState extends State<SelectPreference> {
                       child: InkWell(
                           onTap: () async {
                             addExistingGoal(_syncController.text, context);
+                            Navigator.pop(context);
                           },
                           child: const Icon(Icons.add)),
                     )),

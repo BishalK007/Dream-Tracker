@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dream_tracker/backend.dart';
+import 'package:dream_tracker/colors.dart';
 import 'package:dream_tracker/widgets/home_card.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeBody extends StatefulWidget {
@@ -32,8 +35,27 @@ class _HomeBodyState extends State<HomeBody> {
             padding: const EdgeInsets.all(20),
             itemCount: listSnapShot.data!.length,
             itemBuilder: (context, index) {
-              return HomeCard(
-                id: listSnapShot.data![index],
+              return FutureBuilder(
+                future: isShared(listSnapShot.data![index]),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting ||
+                      snapshot.data == false) {
+                    return HomeCard(
+                      id: listSnapShot.data![index],
+                    );
+                  }
+                  return Badge(
+                    backgroundColor: myPrimarySwatch,
+                    label: const Icon(
+                      Icons.people,
+                      color: Colors.white,
+                    ),
+                    alignment: Alignment.topLeft,
+                    child: HomeCard(
+                      id: listSnapShot.data![index],
+                    ),
+                  );
+                },
               );
             },
           );

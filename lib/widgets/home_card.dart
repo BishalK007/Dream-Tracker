@@ -3,6 +3,7 @@ import 'package:dream_tracker/colors.dart';
 import 'package:dream_tracker/global_variables.dart';
 import 'package:dream_tracker/pages/add_money_page.dart';
 import 'package:dream_tracker/widgets/ad_place.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:expandable_text/expandable_text.dart';
@@ -205,6 +206,17 @@ class _HomeCardState extends State<HomeCard> {
                     'Notes : ${itemSnapShot.data!.notes}',
                     expandText: 'Show More',
                     collapseText: 'Show Less',
+                  ),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.only(left: 20),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Owned By: ${itemSnapShot.data!.createdBy}",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: myPrimarySwatch,
                   ),
                 ),
               ),
@@ -523,7 +535,7 @@ class _BulletSugessionsState extends State<BulletSugessions> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 25,
+                    // height: 25,
                     child: Column(
                       children: [
                         Icon(
@@ -544,7 +556,7 @@ class _BulletSugessionsState extends State<BulletSugessions> {
                   ),
                   const SizedBox(height: 40),
                   SizedBox(
-                    height: height - 25,
+                    height: height * 1.5,
                     child: ListView.builder(
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {

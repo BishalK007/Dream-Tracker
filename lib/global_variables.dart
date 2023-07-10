@@ -30,13 +30,16 @@ class GoalData {
   final String notes;
   final int amountSaved;
   final int goalAmount;
-  GoalData(
-      {required this.amountSaved,
-      required this.goalAmount,
-      required this.id,
-      required this.notes,
-      required this.title,
-      required this.index});
+  final String createdBy;
+  GoalData({
+    required this.amountSaved,
+    required this.goalAmount,
+    required this.id,
+    required this.notes,
+    required this.title,
+    required this.index,
+    required this.createdBy,
+  });
 }
 
 class AdPlaceItem {
