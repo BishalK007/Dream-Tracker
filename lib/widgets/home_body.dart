@@ -46,9 +46,11 @@ class _HomeBodyState extends State<HomeBody> {
                   }
                   return Badge(
                     backgroundColor: myPrimarySwatch,
-                    label: const Icon(
-                      Icons.people,
-                      color: Colors.white,
+                    label: const Text(
+                      "SHARED",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     alignment: Alignment.topLeft,
                     child: HomeCard(
