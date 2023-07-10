@@ -19,29 +19,36 @@ class _AdPlaceState extends State<AdPlace> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: SizedBox(
-        height: 350,
-        // color: Colors.amber,
-        child: FutureBuilder(
-          future: fetchAdPlaceItems(widget.title, widget.goalAmt),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
+      child: FutureBuilder(
+        future: fetchAdPlaceItems(widget.title, widget.goalAmt),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const SizedBox(
+              height: 70,
+              child: Center(
                 child: CircularProgressIndicator(),
-              );
-            } else if (snapshot.hasError ||
-                !snapshot.hasData ||
-                snapshot.data!.isEmpty) {
-              return const Center(
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return const SizedBox(
+              height: 70,
+              child: Center(
                 child: Text('Something Went Wrong..'),
-              );
-            } else {
-              double screenWidth = MediaQuery.of(context).size.width;
-              // print(snapshot.data!);
-              //
-              //______Ad Place Slider___
-              //
-              return CarouselSlider.builder(
+              ),
+            );
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const SizedBox(
+              height: 10,
+            );
+          } else {
+            double screenWidth = MediaQuery.of(context).size.width;
+            // print(snapshot.data!);
+            //
+            //______Ad Place Slider___
+            //
+            return SizedBox(
+              height: 350,
+              child: CarouselSlider.builder(
                 // key: _sliderKey,
                 unlimitedMode: true,
                 slideBuilder: (index) {
@@ -167,10 +174,10 @@ class _AdPlaceState extends State<AdPlace> {
                     indicatorBackgroundColor:
                         Color.fromARGB(255, 221, 189, 255)),
                 itemCount: snapshot.data!.length,
-              );
-            }
-          },
-        ),
+              ),
+            );
+          }
+        },
       ),
     );
   }
