@@ -515,74 +515,59 @@ class _BulletSugessionsState extends State<BulletSugessions> {
             child: Text('Couldn\'t find any sugessions'),
           );
         } else {
-          return NestedScrollView(
-            headerSliverBuilder: (context, innerBoxIsScrolled) {
-              return [
-                SliverAppBar(
-                  automaticallyImplyLeading: false, // remove back button
-                  backgroundColor:
-                      Colors.white, // set background color to white
-                  title: Column(
-                    children: [
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Icon(
-                        Icons.horizontal_rule,
-                        color: myPrimarySwatch,
-                      ),
-                      // const SizedBox(
-                      //   height: 10,
-                      // ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Sugessions-",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: myPrimarySwatch,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+          var height = MediaQuery.of(context).size.height;
+          height = height / 2;
+          return Scaffold(
+            backgroundColor: Colors.white,
+            body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Icon(
+                    Icons.horizontal_rule,
+                    color: myPrimarySwatch,
                   ),
-                ),
-              ];
-            },
-            body: Expanded(
-              child: ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
-                          child: Icon(
-                            FontAwesomeIcons.circleChevronRight,
-                            color: myPrimarySwatch,
-                          ),
-                        ),
-                        Expanded(
-                            child: Padding(
-                          padding: const EdgeInsets.only(right: 12.5),
-                          child: Text(
-                            snapshot.data![index],
-                            textAlign: TextAlign.justify,
-                            style: const TextStyle(fontSize: 16),
-                          ),
-                        ))
-                      ],
+                  Center(
+                    child: Text(
+                      "Suggestions",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: myPrimarySwatch),
                     ),
-                  );
-                },
-                // ),
+                  ),
+                  const SizedBox(height: 40),
+                  SizedBox(
+                    height: height - 82.5,
+                    child: ListView.builder(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
+                                  child: Icon(
+                                    FontAwesomeIcons.circleChevronRight,
+                                    color: myPrimarySwatch,
+                                  ),
+                                ),
+                                Expanded(
+                                    child: Padding(
+                                  padding: const EdgeInsets.only(right: 12.5),
+                                  child: Text(
+                                    snapshot.data![index],
+                                    textAlign: TextAlign.justify,
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                ))
+                              ],
+                            ),
+                          );
+                        }),
+                  )
+                ],
               ),
             ),
           );
