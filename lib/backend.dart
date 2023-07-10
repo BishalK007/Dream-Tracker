@@ -237,7 +237,7 @@ Future<List<dynamic>> fetchAdPlaceItems(String goal, int goalPrice) async {
   QuerySnapshot snapshot = await FirebaseFirestore.instance
       .collection(goal)
       .where("Price", isLessThanOrEqualTo: goalPrice)
-      .orderBy("Price")
+      .orderBy("Price", descending: true)
       .get();
   List<dynamic> adPlaceItems = snapshot.docs.map((doc) {
     Map<String, dynamic> data = (doc.data() as Map<String, dynamic>);
