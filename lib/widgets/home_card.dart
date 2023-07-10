@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hidable/hidable.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_bullet_list/flutter_bullet_list.dart';
@@ -240,7 +241,9 @@ class _HomeCardState extends State<HomeCard> {
                             showModalBottomSheet(
                               context: context,
                               builder: (context) {
-                                return BulletSugessions();
+                                return BulletSugessions(
+                                  preference: itemSnapShot.data!.title,
+                                );
                               },
                             );
                           },
@@ -492,7 +495,8 @@ class _HomeCardState extends State<HomeCard> {
 }
 
 class BulletSugessions extends StatefulWidget {
-  const BulletSugessions({super.key});
+  const BulletSugessions({super.key, required this.preference});
+  final String preference;
 
   @override
   State<BulletSugessions> createState() => _BulletSugessionsState();
@@ -502,7 +506,88 @@ class _BulletSugessionsState extends State<BulletSugessions> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: fetchSu,
+      future: fetchSuggestions(widget.preference),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const Center(
+            child: Text('Couldn\'t find any sugessions'),
+          );
+        } else {
+          return NestedScrollView(
+            headerSliverBuilder: (context, innerBoxIsScrolled) {
+              return [
+                SliverAppBar(
+                  automaticallyImplyLeading: false, // remove back button
+                  backgroundColor:
+                      Colors.white, // set background color to white
+                  title: Column(
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Icon(
+                        Icons.horizontal_rule,
+                        color: myPrimarySwatch,
+                      ),
+                      // const SizedBox(
+                      //   height: 10,
+                      // ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Sugessions-",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: myPrimarySwatch,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ];
+            },
+            body: Expanded(
+              child: ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
+                          child: Icon(
+                            FontAwesomeIcons.circleChevronRight,
+                            color: myPrimarySwatch,
+                          ),
+                        ),
+                        Expanded(
+                            child: Padding(
+                          padding: const EdgeInsets.only(right: 12.5),
+                          child: Text(
+                            snapshot.data![index],
+                            textAlign: TextAlign.justify,
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        ))
+                      ],
+                    ),
+                  );
+                },
+                // ),
+              ),
+            ),
+          );
+        }
+      },
     );
   }
 }

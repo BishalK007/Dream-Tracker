@@ -246,8 +246,12 @@ Future<List<dynamic>> fetchAdPlaceItems(String goal, int goalPrice) async {
   return adPlaceItems;
 }
 
-// Future<List<String>> fetchSuggesions(String preference) async {
-//   final Future<List<String>> tips = [] as Future<List<String>>;
-//   FirebaseFirestore.instance.collection('allGoals')
-//   return tips;
-// }
+Future<List<dynamic>?> fetchSuggestions(String preference) async {
+  final DocumentSnapshot<Map<String, dynamic>> snapshot =
+      await FirebaseFirestore.instance
+          .collection(preference)
+          .doc('Suggestions')
+          .get();
+  final List<dynamic>? tips = snapshot.data()?['tips'];
+  return tips;
+}
