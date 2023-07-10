@@ -118,7 +118,7 @@ class _AddMoneyState extends State<AddMoney> {
                                     (oldValue, newValue) {
                                   final int? parsed =
                                       int.tryParse(newValue.text);
-                                  try {
+                                  // try {
                                     final String formatted =
                                         _formatter.format(parsed);
                                     return TextEditingValue(
@@ -126,9 +126,9 @@ class _AddMoneyState extends State<AddMoney> {
                                       selection: TextSelection.collapsed(
                                           offset: formatted.length),
                                     );
-                                  } catch (e) {
-                                    return const TextEditingValue();
-                                  }
+                                  // } catch (e) {
+                                  //   return const TextEditingValue();
+                                  // }
                                 }),
                               ],
                               controller: _addMoneyController,

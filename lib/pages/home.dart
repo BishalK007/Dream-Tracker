@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
                   ],
-                  offset: const Offset(0, 55),
+                  offset: const Offset(0, 0),
                   color: Colors.white,
                   elevation: 2,
                 ),

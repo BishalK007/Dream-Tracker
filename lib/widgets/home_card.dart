@@ -523,7 +523,7 @@ class _BulletSugessionsState extends State<BulletSugessions> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 82,
+                    height: 30,
                     child: Column(
                       children: [
                         Icon(
@@ -544,7 +544,7 @@ class _BulletSugessionsState extends State<BulletSugessions> {
                   ),
                   const SizedBox(height: 40),
                   SizedBox(
-                    height: height - 82.5,
+                    height: height - 30,
                     child: ListView.builder(
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {

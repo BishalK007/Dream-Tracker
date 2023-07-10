@@ -134,7 +134,7 @@ class _EditPrederenceState extends State<EditPrederence> {
                                     (oldValue, newValue) {
                                   final int? parsed =
                                       int.tryParse(newValue.text);
-                                  try {
+                                  // try {
                                     final String formatted =
                                         _formatter.format(parsed);
                                     return TextEditingValue(
@@ -142,9 +142,9 @@ class _EditPrederenceState extends State<EditPrederence> {
                                       selection: TextSelection.collapsed(
                                           offset: formatted.length),
                                     );
-                                  } catch (e) {
-                                    return const TextEditingValue();
-                                  }
+                                  // } catch (e) {
+                                  //   return const TextEditingValue();
+                                  // }
                                 }),
                               ],
                               style: const TextStyle(color: Colors.black),
