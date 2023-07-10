@@ -245,3 +245,9 @@ Future<List<dynamic>> fetchAdPlaceItems(String goal, int goalPrice) async {
   }).toList();
   return adPlaceItems;
 }
+
+// Future<List<String>> fetchSuggesions(String preference) async {
+//   final Future<List<String>> tips = [] as Future<List<String>>;
+//   FirebaseFirestore.instance.collection('allGoals')
+//   return tips;
+// }

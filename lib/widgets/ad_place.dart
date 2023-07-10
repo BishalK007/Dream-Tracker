@@ -48,116 +48,123 @@ class _AdPlaceState extends State<AdPlace> {
                   //
                   //_____ Ad place Item ______//
                   //
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            height: 200,
-                            width: (screenWidth - 70) / 2,
-                            // color: Colors.red,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(
-                                  color: myPrimarySwatch,
-                                  width: 2,
+                  return InkWell(
+                    onTap: () async {
+                      await launchUrl(
+                          Uri.parse(snapshot.data![index]['Product Url']));
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              height: 200,
+                              width: (screenWidth - 70) / 2,
+                              // color: Colors.red,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(
+                                    color: myPrimarySwatch,
+                                    width: 2,
+                                  ),
                                 ),
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Image.network(
-                                  snapshot.data![index]['Image Link'],
-                                  fit: BoxFit.cover,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: Image.network(
+                                    snapshot.data![index]['Image Link'],
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Container(
-                            height: 200,
-                            width: (screenWidth - 70) / 2,
-                            // color: Colors.blue,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                //
-                                //_______ Title Text ________//
-                                //
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 12),
-                                  child: Text(
-                                    // ignore: prefer_interpolation_to_compose_strings
-                                    "Title: " + snapshot.data![index]['Title'],
-                                    // 'Title : $text',
-                                    style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                    maxLines: 3,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                                //
-                                //_______ Price Text ________//
-                                //
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 12),
-                                  child: Text(
-                                    // ignore: prefer_interpolation_to_compose_strings
-                                    'Price : ' +
-                                        snapshot.data![index]['Price']
-                                            .toString(),
-                                    style: const TextStyle(
-                                      fontSize: 16,
+                            Container(
+                              height: 200,
+                              width: (screenWidth - 70) / 2,
+                              // color: Colors.blue,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  //
+                                  //_______ Title Text ________//
+                                  //
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12),
+                                    child: Text(
+                                      // ignore: prefer_interpolation_to_compose_strings
+                                      "Title: " +
+                                          snapshot.data![index]['Title'],
+                                      // 'Title : $text',
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                      maxLines: 3,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                ),
-                                //
-                                //___ Visit Button __
-                                //
-                                ElevatedButton.icon(
-                                  onPressed: () async {
-                                    await launchUrl(Uri.parse(
-                                        snapshot.data![index]['Product Url']));
-                                  },
-                                  icon: const Icon(FontAwesomeIcons.globe),
-                                  label: const Text('Visit'),
-                                ),
-                              ],
+                                  //
+                                  //_______ Price Text ________//
+                                  //
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12),
+                                    child: Text(
+                                      // ignore: prefer_interpolation_to_compose_strings
+                                      'Price : ' +
+                                          snapshot.data![index]['Price']
+                                              .toString(),
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                      ),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  //
+                                  //___ Visit Button __
+                                  //
+                                  ElevatedButton.icon(
+                                    onPressed: () async {
+                                      await launchUrl(Uri.parse(snapshot
+                                          .data![index]['Product Url']));
+                                    },
+                                    icon: const Icon(FontAwesomeIcons.globe),
+                                    label: const Text('Visit'),
+                                  ),
+                                ],
+                              ),
                             ),
+                          ],
+                        ),
+                        //
+                        //_______ Deccription text _____//
+                        //
+                        const Padding(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                          child: Text(
+                            "Description-",
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                        ],
-                      ),
-                      //
-                      //_______ Deccription text _____//
-                      //
-                      const Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                        child: Text(
-                          "Description-",
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 10),
-                        child: Text(
-                          snapshot.data![index]['Description'],
-                          style: TextStyle(fontSize: 16),
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 5, horizontal: 10),
+                          child: Text(
+                            snapshot.data![index]['Description'],
+                            style: TextStyle(fontSize: 16),
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   );
                 },
                 // slideTransform: const CubeTransform(),
