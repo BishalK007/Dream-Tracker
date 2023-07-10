@@ -52,7 +52,7 @@ class _AdPlaceState extends State<AdPlace> {
               height: 350,
               child: CarouselSlider.builder(
                 // key: _sliderKey,
-                unlimitedMode: true,
+                unlimitedMode: snapshot.data!.length > 2 ? true : false,
                 slideBuilder: (index) {
                   //
                   //_____ Ad place Item ______//
@@ -81,7 +81,7 @@ class _AdPlaceState extends State<AdPlace> {
                                   ),
                                 ),
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: BorderRadius.circular(23),
                                   child: Image.network(
                                     snapshot.data![index]['Image Link'],
                                     fit: BoxFit.cover,
