@@ -522,17 +522,24 @@ class _BulletSugessionsState extends State<BulletSugessions> {
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  Icon(
-                    Icons.horizontal_rule,
-                    color: myPrimarySwatch,
-                  ),
-                  Center(
-                    child: Text(
-                      "Suggestions",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: myPrimarySwatch),
+                  SizedBox(
+                    height: 82,
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.horizontal_rule,
+                          color: myPrimarySwatch,
+                        ),
+                        Center(
+                          child: Text(
+                            "Suggestions",
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: myPrimarySwatch),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 40),
