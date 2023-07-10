@@ -3,6 +3,7 @@ import 'package:dream_tracker/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AdPlace extends StatefulWidget {
@@ -15,6 +16,7 @@ class AdPlace extends StatefulWidget {
 }
 
 class _AdPlaceState extends State<AdPlace> {
+  NumberFormat _formatter = NumberFormat.decimalPattern('en-IN');
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -107,8 +109,10 @@ class _AdPlaceState extends State<AdPlace> {
                                       const EdgeInsets.symmetric(vertical: 12),
                                   child: Text(
                                     // ignore: prefer_interpolation_to_compose_strings
-                                    'Price : ' +
-                                        snapshot.data![index]['Price']
+                                    'Price : ₹' +
+                                        _formatter
+                                            .format(
+                                                snapshot.data![index]['Price'])
                                             .toString(),
                                     style: const TextStyle(
                                       fontSize: 16,
