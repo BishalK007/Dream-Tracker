@@ -142,7 +142,8 @@ class _AdPlaceState extends State<AdPlace> {
                                       await launchUrl(Uri.parse(snapshot
                                           .data![index]['Product Url']));
                                     },
-                                    icon: const Icon(FontAwesomeIcons.globe),
+                                    icon: const Icon(FontAwesomeIcons.globe,
+                                        size: 16),
                                     label: const Text('Visit'),
                                   ),
                                 ],
