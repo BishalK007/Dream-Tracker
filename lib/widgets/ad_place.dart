@@ -124,8 +124,8 @@ class _AdPlaceState extends State<AdPlace> {
                                       // ignore: prefer_interpolation_to_compose_strings
                                       'Price : ₹' +
                                           _formatter
-                                            .format(
-                                                snapshot.data![index]['Price'])
+                                              .format(snapshot.data![index]
+                                                  ['Price'])
                                               .toString(),
                                       style: const TextStyle(
                                         fontSize: 16,

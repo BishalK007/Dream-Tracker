@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/services.dart';
+import 'package:hidable/hidable.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_bullet_list/flutter_bullet_list.dart';
 
 import '../pages/editPreferenceDetails.dart';
 
@@ -202,6 +204,49 @@ class _HomeCardState extends State<HomeCard> {
                     'Notes : ${itemSnapShot.data!.notes}',
                     expandText: 'Show More',
                     collapseText: 'Show Less',
+                  ),
+                ),
+              ),
+              //
+              // __________ See Sugession __//
+              //
+              Visibility(
+                visible: (itemSnapShot.data!.title == 'Buy a Bike' ||
+                        itemSnapShot.data!.title == 'Books and Magazines' ||
+                        itemSnapShot.data!.title == 'Buy a Car' ||
+                        itemSnapShot.data!.title == 'Fashion & Style' ||
+                        itemSnapShot.data!.title == 'Health and Wellness' ||
+                        itemSnapShot.data!.title == 'Tech & Gadgets' ||
+                        itemSnapShot.data!.title == 'Travel and Vacation')
+                    ? true
+                    : false,
+                child: Container(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.remove_red_eye,
+                          color: myPrimarySwatch,
+                        ),
+                        TextButton(
+                          child: const Text('See Sugessions'),
+                          onPressed: () {
+                            //
+                            //____ Sugession Bottom Sheet ________//
+                            //
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (context) {
+                                return BulletSugessions();
+                              },
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -442,6 +487,22 @@ class _HomeCardState extends State<HomeCard> {
           );
         }
       },
+    );
+  }
+}
+
+class BulletSugessions extends StatefulWidget {
+  const BulletSugessions({super.key});
+
+  @override
+  State<BulletSugessions> createState() => _BulletSugessionsState();
+}
+
+class _BulletSugessionsState extends State<BulletSugessions> {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: fetchSu,
     );
   }
 }
