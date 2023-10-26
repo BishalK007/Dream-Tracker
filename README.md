@@ -1,3 +1,4 @@
+![repo-banner](https://i.postimg.cc/QNYv4TfB/dream-tracker.png)
 # Dream Tracker
 
 Experience seamless financial management and personalized guidance with Dream Tracker, empowering you to achieve your goals, make smart investments, and embrace financial well-being.
